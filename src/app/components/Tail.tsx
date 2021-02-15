@@ -32,15 +32,13 @@ const Arrow = styled.svg`
     };
 `;
 
-const Tail = () => {
-  return (
-    <Container>
-      <StyledLogo />
-      <Arrow viewBox="0 0 8 16">
-        <path d="M1.52227 0L0 1.88L4.94467 8L0 14.12L1.52227 16L8 8L1.52227 0Z" />
-      </Arrow>
-    </Container>
-  );
-};
+const Tail = ({ onClick }: { onClick: () => void }) => (
+  <Container onClick={onClick}>
+    <StyledLogo />
+    <Arrow viewBox="0 0 8 16">
+      <path d="M1.52227 0L0 1.88L4.94467 8L0 14.12L1.52227 16L8 8L1.52227 0Z" />
+    </Arrow>
+  </Container>
+);
 
 export default Tail;

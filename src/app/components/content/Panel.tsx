@@ -9,6 +9,8 @@ import OpenInNewIcon from '../../icons/OpenInNewIcon';
 import CloseIcon from '../../icons/CloseIcon';
 
 type PanelPropsType = {
+  hidden: boolean,
+  toggleHidden: () => void,
   dictionaries: { name: string, onPress: () => void, onPressNew: () => void, active: boolean }[],
 };
 
@@ -17,7 +19,7 @@ const Container = styled.div`
   width: 304px;
   display: flex;
   flex-direction: column;
-  // left: -311px;
+  left: ${({ hidden }) => (hidden ? '-304px' : 0)};
   top: 0;
   height: 100%;
   z-index: 100000;
@@ -67,14 +69,14 @@ const DictList = styled(List)`
   flex-direction: column;
 `;
 
-const Panel = ({ dictionaries }: PanelPropsType) => (
-  <Container>
+const Panel = ({ dictionaries, hidden, toggleHidden }: PanelPropsType) => (
+  <Container hidden={hidden}>
     <Head>
       <HeadLogo />
       <Title variant="subtitle1">
         mimic dictionary
       </Title>
-      <CloseButton role="button">
+      <CloseButton role="button" onClick={toggleHidden}>
         <CloseIcon />
       </CloseButton>
     </Head>
@@ -84,7 +86,7 @@ const Panel = ({ dictionaries }: PanelPropsType) => (
       </div>
     </Form>
     <DictList>
-      {dictionaries.map(({ name}) => (
+      {dictionaries.map(({ name }) => (
         <ListItem key={name}>
           <ListItemContent>
             <Typography variant="subtitle1">

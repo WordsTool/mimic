@@ -7,19 +7,25 @@ import FontStyle from './styles/fonts';
 import Panel from './components/content/Panel';
 import dictionaries from './dictionaries';
 
-const MimicContent = () => (
-  <Theme>
-    <FontStyle />
-    <Panel
-      dictionaries={dictionaries.map(({ name }) => ({
-        name,
-        active: Math.random() < 0.5,
-        onPressNew: () => {},
-        onPress: () => {},
-      }))}
-    />
-    <Tail />
-  </Theme>
-);
+const MimicContent = () => {
+  const [hidden, toggleHidden] = React.useState(true);
+
+  return (
+    <Theme>
+      <FontStyle />
+      <Panel
+        hidden={hidden}
+        toggleHidden={() => toggleHidden(!hidden)}
+        dictionaries={dictionaries.map(({ name }) => ({
+          name,
+          active: Math.random() < 0.5,
+          onPressNew: () => {},
+          onPress: () => {},
+        }))}
+      />
+      <Tail onClick={() => toggleHidden(!hidden)} />
+    </Theme>
+  );
+};
 
 ReactDOM.render((<MimicContent />), addDom());
