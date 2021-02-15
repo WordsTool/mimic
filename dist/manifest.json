@@ -1,0 +1,32 @@
+{
+  "name": "Mimic dictionary",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Open online dictionaries",
+  "homepage_url": "https://www.patreon.com/mimicdictionary",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Mimic",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "all_frames": false,
+      "js": ["js/content.js"]
+    }
+  ]
+}

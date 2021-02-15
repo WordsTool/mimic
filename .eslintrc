@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": ["webpack.*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
+  "extends": [
+    "airbnb-typescript",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ]
+}
