@@ -9,7 +9,7 @@ import List, {
   ListItem, ListItemAction, ListItemContent, ListItemIcon,
 } from '../base/List';
 
-const ListContainer = styled(List)`
+const ListContainer = styled(List)<{ isDraggingOver: boolean }>`
   background-color: ${({ isDraggingOver, theme }) => (isDraggingOver ? '#F6F6F6' : theme.palette.paper.main)};
 `;
 

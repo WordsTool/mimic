@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const List = styled.div<{ isDraggingOver: boolean }>`
+const List = styled.div`
 `;
 
 export const ListItem = styled.div`
