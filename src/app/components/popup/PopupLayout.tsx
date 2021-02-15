@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Tabs, { TabPane } from 'rc-tabs';
 import { getStyle } from '../base/Typography';
+import PoweredBy from '../common/PoweredBy';
 
 type PopupLayoutPropsType = {
   settings: React.ReactNode,
@@ -11,10 +12,21 @@ type PopupLayoutPropsType = {
 
 const Container = styled.div`
   width: 420px;
-  height: 340px;
+  height: 360px;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
   background-color: ${({ theme }) => theme.palette.paper.main};
   .rc-tabs {
     border: none;
+    display: flex;
+    flex: 1;
+    overflow: ininial;
+  }
+  .rc-tabs-content-holder {
+    display: flex;
+    flex: 1;
+    overflow: auto;
   }
   .rc-tabs-tab,.rc-tabs-nav-list {
     flex: 1;
@@ -26,11 +38,19 @@ const Container = styled.div`
   .rc-tabs-tab-btn{
     ${getStyle('button')}
     color: ${({ theme }) => theme.palette.text.primary};
-    line-height: 48px;
+    line-height: 52px;
     text-align: center;
     flex: 1;
     outline: none;
   }
+`;
+
+const Footer = styled.div`
+  height: 52px;
+  padding: 0 16px;
+  flex-direction: row;
+  align-items: center;
+  display: flex;
 `;
 
 const PopupLayout = (props: PopupLayoutPropsType) => {
@@ -49,6 +69,9 @@ const PopupLayout = (props: PopupLayoutPropsType) => {
           {help}
         </TabPane>
       </Tabs>
+      <Footer>
+        <PoweredBy size="small" />
+      </Footer>
     </Container>
   );
 };

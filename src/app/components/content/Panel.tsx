@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Typography from '../base/Typography';
 import Logo from '../../icons/Logo';
 import List, { ListItem, ListItemAction, ListItemContent } from '../base/List';
-import WordstoolLogo from '../../icons/WordstoolLogo';
 import PinIcon from '../../icons/PinIcon';
 import OpenInNewIcon from '../../icons/OpenInNewIcon';
 import CloseIcon from '../../icons/CloseIcon';
+import PoweredBy from '../common/PoweredBy';
 
 type PanelPropsType = {
   hidden: boolean,
@@ -41,6 +41,12 @@ const Form = styled.div`
 `;
 
 const Footer = styled.div`
+  height: 56px;
+  display: flex;
+  flex-direction: row;  
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
 `;
 
 const HeadLogo = styled(Logo)`
@@ -64,6 +70,7 @@ const MainInput = styled.input`
   line-height: 42px;
 `;
 const DictList = styled(List)`
+  overflow: auto;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -100,13 +107,7 @@ const Panel = ({ dictionaries, hidden, toggleHidden }: PanelPropsType) => (
       ))}
     </DictList>
     <Footer>
-      <WordstoolLogo />
-      <Typography variant="overline">
-        powered by
-      </Typography>
-      <Typography variant="body1">
-        WordsTool
-      </Typography>
+      <PoweredBy />
       <PinIcon />
     </Footer>
   </Container>
