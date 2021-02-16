@@ -7,6 +7,10 @@ type PaletteItem = {
 type CommonPalette = {
   primary: PaletteItem,
   secondary: PaletteItem,
+  highlight: {
+    active: string,
+    hover: string,
+  },
 };
 
 type ColorPalette = {
@@ -28,6 +32,10 @@ const common: CommonPalette = {
     light: '#ffad42',
     main: '#F57C00',
     dark: '#bb4d00',
+  },
+  highlight: {
+    active: 'rgba(76, 146, 255, 0.40)',
+    hover: 'rgba(76, 146, 255, 0.20)',
   },
 };
 

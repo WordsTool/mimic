@@ -8,7 +8,7 @@ import Panel from './components/content/Panel';
 import dictionaries from './dictionaries';
 
 const MimicContent = () => {
-  const [hidden, toggleHidden] = React.useState(true);
+  const [hidden, toggleHidden] = React.useState(false);
   const [pinned, togglePinned] = React.useState(true);
 
   return (

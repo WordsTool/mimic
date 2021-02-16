@@ -102,8 +102,8 @@ const Panel = (props: PanelPropsType) => {
         <MainInput />
       </Form>
       <DictList>
-        {dictionaries.map(({ name }) => (
-          <ListItem key={name}>
+        {dictionaries.map(({ name, active }) => (
+          <ListItem key={name} active={active}>
             <ListItemContent>
               <Typography variant="subtitle1">
                 {name}
