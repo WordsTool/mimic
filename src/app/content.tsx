@@ -8,15 +8,15 @@ import Panel from './components/content/Panel';
 import dictionaries from './dictionaries';
 
 const MimicContent = () => {
-  const [hidden, toggleHidden] = React.useState(false);
-  const [pinned, togglePinned] = React.useState(true);
+  const [hidden, toggleHidden] = React.useState(true);
+  const [pinned, togglePinned] = React.useState(false);
 
   return (
     <Theme>
       <FontStyle />
       <Panel
         hidden={hidden}
-        toggleHidden={() => toggleHidden(!hidden)}
+        toggleHidden={() => toggleHidden(true)}
         pinned={pinned}
         togglePinned={() => togglePinned(!pinned)}
         dictionaries={dictionaries.map(({ name }) => ({
@@ -26,7 +26,11 @@ const MimicContent = () => {
           onPress: () => {},
         }))}
       />
-      <Tail onClick={() => toggleHidden(!hidden)} />
+      <Tail
+        hidden={hidden}
+        onClick={() => toggleHidden(false)}
+        position={{ vertical: 'top', horizontal: 'right' }}
+      />
     </Theme>
   );
 };
