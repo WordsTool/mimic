@@ -7,10 +7,14 @@ import PinIcon from '../../icons/PinIcon';
 import OpenInNewIcon from '../../icons/OpenInNewIcon';
 import CloseIcon from '../../icons/CloseIcon';
 import PoweredBy from '../common/PoweredBy';
+import IconButton from '../base/IconButton';
+import MainInput from './MainInput';
 
 type PanelPropsType = {
   hidden: boolean,
   toggleHidden: () => void,
+  pinned: boolean,
+  togglePinned: () => void,
   dictionaries: { name: string, onPress: () => void, onPressNew: () => void, active: boolean }[],
 };
 
@@ -54,28 +58,13 @@ const HeadLogo = styled(Logo)`
   height: 32px;  
 `;
 const Title = styled(Typography)`
-  font-size: 16px;
+  font-size: 18px;  
   margin: 0 0 0 20px;
 `;
-const CloseButton = styled.div`
+const CloseButton = styled(IconButton)`
   position: absolute;
   right: 8px;
-  top: 12px;
-  padding: 8px;
-  cursor: pointer;
-`;
-const MainInput = styled.input`
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  outline: none;
-  height: 42px;
-  line-height: 42px;
-  border: 0;
-  border-radius: 4px;
-`;
-
-const InputWrapper = styled.div`
+  top: 16px;
 `;
 
 const DictList = styled(List)`
@@ -85,41 +74,55 @@ const DictList = styled(List)`
   flex-direction: column;
 `;
 
-const Panel = ({ dictionaries, hidden, toggleHidden }: PanelPropsType) => (
-  <Container hidden={hidden}>
-    <Head>
-      <HeadLogo />
-      <Title variant="subtitle1">
-        mimic dictionary
-      </Title>
-      <CloseButton role="button" onClick={toggleHidden}>
-        <CloseIcon />
-      </CloseButton>
-    </Head>
-    <Form>
-      <InputWrapper>
-        <MainInput placeholder="Enter phrase" />
-      </InputWrapper>
-    </Form>
-    <DictList>
-      {dictionaries.map(({ name }) => (
-        <ListItem key={name}>
-          <ListItemContent>
-            <Typography variant="subtitle1">
-              {name}
-            </Typography>
-          </ListItemContent>
-          <ListItemAction>
-            <OpenInNewIcon />
-          </ListItemAction>
-        </ListItem>
-      ))}
-    </DictList>
-    <Footer>
-      <PoweredBy />
-      <PinIcon />
-    </Footer>
-  </Container>
-);
+const PinAndUnpinIcon = styled(PinIcon)<{ pinned: boolean }>`
+  transform: ${({ pinned }) => (pinned ? 'rotate(45deg)' : 'rotate(0deg)')}; 
+`;
+
+const Panel = (props: PanelPropsType) => {
+  const {
+    dictionaries,
+    hidden,
+    toggleHidden,
+    pinned,
+    togglePinned,
+  } = props;
+
+  return (
+    <Container hidden={hidden}>
+      <Head>
+        <HeadLogo />
+        <Title variant="subtitle1">
+          mimic dictionary
+        </Title>
+        <CloseButton onClick={toggleHidden}>
+          <CloseIcon />
+        </CloseButton>
+      </Head>
+      <Form>
+        <MainInput />
+      </Form>
+      <DictList>
+        {dictionaries.map(({ name }) => (
+          <ListItem key={name}>
+            <ListItemContent>
+              <Typography variant="subtitle1">
+                {name}
+              </Typography>
+            </ListItemContent>
+            <ListItemAction>
+              <OpenInNewIcon />
+            </ListItemAction>
+          </ListItem>
+        ))}
+      </DictList>
+      <Footer>
+        <PoweredBy />
+        <IconButton onClick={() => togglePinned()}>
+          <PinAndUnpinIcon pinned={pinned} />
+        </IconButton>
+      </Footer>
+    </Container>
+  );
+};
 
 export default Panel;

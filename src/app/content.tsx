@@ -9,6 +9,7 @@ import dictionaries from './dictionaries';
 
 const MimicContent = () => {
   const [hidden, toggleHidden] = React.useState(true);
+  const [pinned, togglePinned] = React.useState(true);
 
   return (
     <Theme>
@@ -16,6 +17,8 @@ const MimicContent = () => {
       <Panel
         hidden={hidden}
         toggleHidden={() => toggleHidden(!hidden)}
+        pinned={pinned}
+        togglePinned={() => togglePinned(!pinned)}
         dictionaries={dictionaries.map(({ name }) => ({
           name,
           active: Math.random() < 0.5,

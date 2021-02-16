@@ -9,6 +9,9 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
+  "rules": {
+    "react/jsx-props-no-spreading": "off"
+  },
   "overrides": [
     {
       "files": ["webpack.*.js"],
