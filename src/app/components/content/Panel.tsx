@@ -23,7 +23,7 @@ const Container = styled.div`
   top: 0;
   height: 100%;
   z-index: 100000;
-  background-color: ${({ theme }) => theme.palette.paper.main};
+  background-color: ${({ theme }) => theme.palette.surface.main};
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,.2), 0px 1px 18px 0px rgba(0,0,0,.12), 0px 6px 10px 0px rgba(0,0,0,.14);
 `;
 
@@ -37,7 +37,7 @@ const Head = styled.div`
 
 const Form = styled.div`
   padding: 20px 16px;
-  background-color: ${({ theme }) => theme.palette.primary.main}
+  background-color: ${({ theme }) => theme.palette.primary.dark}
 `;
 
 const Footer = styled.div`
@@ -59,16 +59,25 @@ const Title = styled(Typography)`
 `;
 const CloseButton = styled.div`
   position: absolute;
-  right: 12px;
-  top: 16px;
+  right: 8px;
+  top: 12px;
   padding: 8px;
   cursor: pointer;
 `;
 const MainInput = styled.input`
   width: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
   height: 42px;
   line-height: 42px;
+  border: 0;
+  border-radius: 4px;
 `;
+
+const InputWrapper = styled.div`
+`;
+
 const DictList = styled(List)`
   overflow: auto;
   display: flex;
@@ -88,9 +97,9 @@ const Panel = ({ dictionaries, hidden, toggleHidden }: PanelPropsType) => (
       </CloseButton>
     </Head>
     <Form>
-      <div>
-        <MainInput />
-      </div>
+      <InputWrapper>
+        <MainInput placeholder="Enter phrase" />
+      </InputWrapper>
     </Form>
     <DictList>
       {dictionaries.map(({ name }) => (

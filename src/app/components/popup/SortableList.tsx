@@ -10,12 +10,12 @@ import List, {
 } from '../base/List';
 
 const ListContainer = styled(List)<{ isDraggingOver: boolean }>`
-  background-color: ${({ isDraggingOver, theme }) => (isDraggingOver ? '#F6F6F6' : theme.palette.paper.main)};
+  background-color: ${({ isDraggingOver, theme }) => (isDraggingOver && theme.palette.surface.light)};
 `;
 
 const SortableListItem = styled(ListItem)<{ isDragging: boolean }>`
   box-shadow: ${({ isDragging }) => (isDragging ? '0px 3px 5px 0px rgba(0,0,0,.1)' : 'none')};
-  background-color: ${(props) => props.theme.palette.paper.main};
+  background-color: ${(props) => props.theme.palette.surface.main};
 `;
 
 const SortableList = ({ list }: { list: { name: string }[] }) => {

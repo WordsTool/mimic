@@ -16,12 +16,11 @@ const Container = styled.div`
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.palette.paper.main};
+  background-color: ${({ theme }) => theme.palette.surface.main};
   .rc-tabs {
     border: none;
     display: flex;
     flex: 1;
-    overflow: ininial;
   }
   .rc-tabs-content-holder {
     display: flex;
@@ -37,7 +36,7 @@ const Container = styled.div`
   }
   .rc-tabs-tab-btn{
     ${getStyle('button')}
-    color: ${({ theme }) => theme.palette.text.primary};
+    color: ${({ theme }) => theme.palette.text.main};
     line-height: 52px;
     text-align: center;
     flex: 1;
@@ -48,6 +47,7 @@ const Container = styled.div`
 const Footer = styled.div`
   height: 52px;
   padding: 0 16px;
+  background-color: ${({ theme }) => theme.palette.surface.dark};
   flex-direction: row;
   align-items: center;
   display: flex;

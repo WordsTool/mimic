@@ -39,7 +39,7 @@ const Container = styled.a`
 
 const PoweredBy = ({ size }: { size?: SizeType }) => (
   <Container href="https://wordstool.com" target="_blank">
-    <Powered size={size} variant="overline">
+    <Powered size={size} variant="overline" color="light">
       powered by
     </Powered>
     <LogoIcon size={size} />

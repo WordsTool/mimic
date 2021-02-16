@@ -17,7 +17,7 @@ type Variant = 'headline1'
 
 type TypographyPropsType = {
   variant?: Variant,
-  color?: 'primary',
+  color?: 'main' | 'light' | 'dark',
 };
 
 const PrimaryFont = 'Nunito-Light, system-ui, sans-serif';
@@ -60,7 +60,7 @@ const Typography = styled.div<TypographyPropsType>`
 
 Typography.defaultProps = {
   variant: 'body1',
-  color: 'primary',
+  color: 'main',
 };
 
 export default Typography;
