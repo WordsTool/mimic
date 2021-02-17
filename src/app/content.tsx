@@ -16,7 +16,7 @@ const MimicContent = () => {
       <FontStyle />
       <Panel
         position="left"
-        hidden={hidden}
+        isHidden={hidden}
         toggleHidden={() => toggleHidden(true)}
         pinned={pinned}
         togglePinned={() => togglePinned(!pinned)}
@@ -28,7 +28,7 @@ const MimicContent = () => {
         }))}
       />
       <Tail
-        hidden={hidden}
+        isHidden={hidden}
         onClick={() => toggleHidden(false)}
         position={{ vertical: 'center', horizontal: 'right' }}
       />

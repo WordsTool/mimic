@@ -17,7 +17,7 @@ const verticalPositions: { top: string, center: string, bottom: string } = {
   bottom: '75%',
 };
 
-const Container = styled.div<{ vertical: VerticalPosition, horizontal: HorizontalType, hidden: boolean }>`
+const Container = styled.div<{ vertical: VerticalPosition, horizontal: HorizontalType, isHidden: boolean }>`
   cursor: pointer;
   position: fixed;
   top: ${({ vertical }) => verticalPositions[vertical]};
@@ -32,7 +32,7 @@ const Container = styled.div<{ vertical: VerticalPosition, horizontal: Horizonta
   transition: transform 0.1s ease-in-out;
   left: ${({ horizontal }) => ({ left: '0', right: '100%' }[horizontal])};
   border-radius: ${({ horizontal }) => ({ left: '0 10px 10px 0', right: '10px 0 0 10px' }[horizontal])};
-  transform: ${({ horizontal, hidden }) => (hidden
+  transform: ${({ horizontal, isHidden }) => (isHidden
     ? ({ left: 'translateX(-24px)', right: 'translateX(-16px)' }[horizontal])
     : ({ left: 'translateX(-40px)', right: 'translateX(0px)' }[horizontal]))};
   flex-direction: ${({ horizontal }) => ({ left: 'row', right: 'row-reverse' }[horizontal])};
@@ -58,9 +58,9 @@ const Arrow = styled.svg<{ horizontal: HorizontalType }>`
     };
 `;
 
-type TailPropsType = { hidden: boolean, position: TailPosition, onClick: () => void };
+type TailPropsType = { isHidden: boolean, position: TailPosition, onClick: () => void };
 
-const Tail = ({ onClick, position, hidden }: TailPropsType) => {
+const Tail = ({ onClick, position, isHidden }: TailPropsType) => {
   const {
     horizontal,
     vertical,
@@ -71,7 +71,7 @@ const Tail = ({ onClick, position, hidden }: TailPropsType) => {
       onClick={onClick}
       vertical={vertical}
       horizontal={horizontal}
-      hidden={hidden}
+      isHidden={isHidden}
       role="button"
     >
       <StyledLogo />

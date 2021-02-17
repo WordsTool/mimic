@@ -14,20 +14,20 @@ type PositionType = 'right' | 'left';
 
 export interface PanelPropsType {
   position: PositionType,
-  hidden: boolean,
+  isHidden: boolean,
   toggleHidden: () => void,
   pinned: boolean,
   togglePinned: () => void,
   dictionaries: { name: string, onPress: () => void, onPressNew: () => void, active: boolean }[],
 }
 
-const Container = styled.div<{ position: PositionType, hidden: boolean }>`
+const Container = styled.div<{ position: PositionType, isHidden: boolean }>`
   position: fixed;
   width: 304px;
   display: flex;
   flex-direction: column;
-  transform: ${({ hidden, position }) => (
-    ((hidden && (position === 'left')) || (!hidden && (position === 'right'))) ? 'translateX(-304px)' : 'translateX(0)'
+  transform: ${({ isHidden, position }) => (
+    ((isHidden && (position === 'left')) || (!isHidden && (position === 'right'))) ? 'translateX(-304px)' : 'translateX(0)'
   )};
   left: ${({ position }) => (position === 'left' ? '0' : '100%')}; 
   transition: transform 0.1s ease-in-out;
@@ -88,14 +88,14 @@ const PinAndUnpinIcon = styled(PinIcon)<{ pinned: boolean }>`
 const Panel = (props: PanelPropsType) => {
   const {
     dictionaries,
-    hidden,
+    isHidden,
     toggleHidden,
     pinned,
     togglePinned,
     position,
   } = props;
 
-  const [inTransition, toggleTransition] = React.useState(!hidden);
+  const [inTransition, toggleTransition] = React.useState(!isHidden);
   const firstRender = React.useRef(false);
 
   React.useEffect(
@@ -105,15 +105,15 @@ const Panel = (props: PanelPropsType) => {
       }
       firstRender.current = true;
     },
-    [hidden],
+    [isHidden],
   );
   const onAnimationEnd = () => {
     toggleTransition(false);
   };
 
   return (
-    <Container onTransitionEnd={onAnimationEnd} hidden={hidden} position={position}>
-      {hidden && !inTransition ? null : (
+    <Container onTransitionEnd={onAnimationEnd} isHidden={isHidden} position={position}>
+      {isHidden && !inTransition ? null : (
         <>
           <Head>
             <HeadLogo />
