@@ -28,13 +28,15 @@ export interface PanelPropsType {
   onPressItemNew: (url: string) => void,
 }
 
+const PANEL_WIDTH = 240;
+
 const Container = styled.div<{ position: PositionType, isHidden: boolean }>`
   position: fixed;
-  width: 304px;
+  width: ${PANEL_WIDTH}px;
   display: flex;
   flex-direction: column;
   transform: ${({ isHidden, position }) => (
-    ((isHidden && (position === 'left')) || (!isHidden && (position === 'right'))) ? 'translateX(-304px)' : 'translateX(0)'
+    ((isHidden && (position === 'left')) || (!isHidden && (position === 'right'))) ? `translateX(-${PANEL_WIDTH}px)` : 'translateX(0)'
   )};
   left: ${({ position }) => (position === 'left' ? '0' : '100%')}; 
   transition: transform 0.1s ease-in-out;
@@ -72,8 +74,8 @@ const HeadLogo = styled(Logo)`
   height: 32px;  
 `;
 const Title = styled(Typography)`
-  font-size: 18px;  
-  margin: 0 0 0 20px;
+  font-size: 16px;  
+  margin: 0 0 0 16px;
 `;
 const CloseButton = styled(IconButton)`
   position: absolute;

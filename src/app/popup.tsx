@@ -28,4 +28,8 @@ const Popup = () => (
   </Theme>
 );
 
+chrome.runtime.sendMessage(chrome.runtime.id, { source: 'popup', hello: 'from popup' }, {}, (response) => {
+  console.log(response);
+});
+
 ReactDOM.render(<Popup />, document.getElementById('root'));
