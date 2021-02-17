@@ -32,15 +32,22 @@ const Border = styled.div<{ focus: boolean }>`
   border-radius: 6px;
 `;
 
-const MainInput = () => {
+const MainInput = ({ onChange, value }: { value: string, onChange: (phrase: string) => void }) => {
   const [focus, toggleFocus] = React.useState(false);
+
+  const handleChange = ({ target: { value: newValue } }: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(newValue);
+  };
+
   return (
     <InputWrapper>
       <Border focus={focus} />
       <InputField
+        value={value}
         placeholder="Enter phrase"
         onFocus={() => toggleFocus(true)}
         onBlur={() => toggleFocus(false)}
+        onChange={handleChange}
       />
     </InputWrapper>
   );

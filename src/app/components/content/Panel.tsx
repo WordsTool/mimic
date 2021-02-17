@@ -8,9 +8,13 @@ import OpenInNewIcon from '../../icons/OpenInNewIcon';
 import CloseIcon from '../../icons/CloseIcon';
 import PoweredBy from '../common/PoweredBy';
 import IconButton from '../base/IconButton';
-import MainInput from './MainInput';
 
 type PositionType = 'right' | 'left';
+type DictionaryItem = {
+  name: string,
+  active: boolean,
+  url: string,
+};
 
 export interface PanelPropsType {
   position: PositionType,
@@ -18,7 +22,10 @@ export interface PanelPropsType {
   toggleHidden: () => void,
   pinned: boolean,
   togglePinned: () => void,
-  dictionaries: { name: string, onPress: () => void, onPressNew: () => void, active: boolean }[],
+  dictionaries: DictionaryItem[],
+  mainInput: React.ReactNode,
+  onPressItem: (url: string) => void,
+  onPressItemNew: (url: string) => void,
 }
 
 const Container = styled.div<{ position: PositionType, isHidden: boolean }>`
@@ -93,6 +100,9 @@ const Panel = (props: PanelPropsType) => {
     pinned,
     togglePinned,
     position,
+    mainInput,
+    onPressItem,
+    onPressItemNew,
   } = props;
 
   const [inTransition, toggleTransition] = React.useState(!isHidden);
@@ -100,9 +110,7 @@ const Panel = (props: PanelPropsType) => {
 
   React.useEffect(
     () => {
-      if (firstRender.current) {
-        toggleTransition(true);
-      }
+      if (firstRender.current) toggleTransition(true);
       firstRender.current = true;
     },
     [isHidden],
@@ -125,17 +133,17 @@ const Panel = (props: PanelPropsType) => {
             </CloseButton>
           </Head>
           <Form>
-            <MainInput />
+            {mainInput}
           </Form>
           <DictList>
-            {dictionaries.map(({ name, active }) => (
-              <ListItem key={name} active={active}>
+            {dictionaries.map(({ name, active, url }) => (
+              <ListItem key={name} active={active} onClick={() => onPressItem(url)}>
                 <ListItemContent>
                   <Typography variant="subtitle1">
                     {name}
                   </Typography>
                 </ListItemContent>
-                <ListItemAction>
+                <ListItemAction onClick={() => onPressItemNew(url)}>
                   <OpenInNewIcon />
                 </ListItemAction>
               </ListItem>
