@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import Typography from '../base/Typography';
 import Logo from '../../icons/Logo';
 import List, { ListItem, ListItemAction, ListItemContent } from '../base/List';
@@ -10,20 +10,27 @@ import PoweredBy from '../common/PoweredBy';
 import IconButton from '../base/IconButton';
 import MainInput from './MainInput';
 
-type PanelPropsType = {
+type PositionType = 'right' | 'left';
+
+export interface PanelPropsType {
+  position: PositionType,
   hidden: boolean,
   toggleHidden: () => void,
   pinned: boolean,
   togglePinned: () => void,
   dictionaries: { name: string, onPress: () => void, onPressNew: () => void, active: boolean }[],
-};
+}
 
-const Container = styled.div`
+const Container = styled.div<{ position: PositionType, hidden: boolean }>`
   position: fixed;
   width: 304px;
   display: flex;
   flex-direction: column;
-  left: ${({ hidden }) => (hidden ? '-304px' : 0)};
+  transform: ${({ hidden, position }) => (
+    ((hidden && (position === 'left')) || (!hidden && (position === 'right'))) ? 'translateX(-304px)' : 'translateX(0)'
+  )};
+  left: ${({ position }) => (position === 'left' ? '0' : '100%')}; 
+  transition: transform 0.1s ease-in-out;
   top: 0;
   height: 100%;
   z-index: 100000;
@@ -85,42 +92,63 @@ const Panel = (props: PanelPropsType) => {
     toggleHidden,
     pinned,
     togglePinned,
+    position,
   } = props;
 
+  const [inTransition, toggleTransition] = React.useState(!hidden);
+  const firstRender = React.useRef(false);
+
+  React.useEffect(
+    () => {
+      if (firstRender.current) {
+        toggleTransition(true);
+      }
+      firstRender.current = true;
+    },
+    [hidden],
+  );
+  const onAnimationEnd = () => {
+    toggleTransition(false);
+  };
+
   return (
-    <Container hidden={hidden}>
-      <Head>
-        <HeadLogo />
-        <Title variant="subtitle1">
-          mimic dictionary
-        </Title>
-        <CloseButton onClick={toggleHidden}>
-          <CloseIcon />
-        </CloseButton>
-      </Head>
-      <Form>
-        <MainInput />
-      </Form>
-      <DictList>
-        {dictionaries.map(({ name, active }) => (
-          <ListItem key={name} active={active}>
-            <ListItemContent>
-              <Typography variant="subtitle1">
-                {name}
-              </Typography>
-            </ListItemContent>
-            <ListItemAction>
-              <OpenInNewIcon />
-            </ListItemAction>
-          </ListItem>
-        ))}
-      </DictList>
-      <Footer>
-        <PoweredBy />
-        <IconButton onClick={() => togglePinned()}>
-          <PinAndUnpinIcon pinned={pinned} />
-        </IconButton>
-      </Footer>
+    <Container onTransitionEnd={onAnimationEnd} hidden={hidden} position={position}>
+      {hidden && !inTransition ? null : (
+        <>
+          <Head>
+            <HeadLogo />
+            <Title variant="subtitle1">
+              mimic dictionary
+            </Title>
+            <CloseButton onClick={toggleHidden}>
+              <CloseIcon />
+            </CloseButton>
+          </Head>
+          <Form>
+            <MainInput />
+          </Form>
+          <DictList>
+            {dictionaries.map(({ name, active }) => (
+              <ListItem key={name} active={active}>
+                <ListItemContent>
+                  <Typography variant="subtitle1">
+                    {name}
+                  </Typography>
+                </ListItemContent>
+                <ListItemAction>
+                  <OpenInNewIcon />
+                </ListItemAction>
+              </ListItem>
+            ))}
+          </DictList>
+          <Footer>
+            <PoweredBy />
+            <IconButton onClick={() => togglePinned()}>
+              <PinAndUnpinIcon pinned={pinned} />
+            </IconButton>
+          </Footer>
+        </>
+      )}
     </Container>
   );
 };

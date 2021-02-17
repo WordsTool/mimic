@@ -34,7 +34,7 @@ const Container = styled.div<{ vertical: VerticalPosition, horizontal: Horizonta
   border-radius: ${({ horizontal }) => ({ left: '0 10px 10px 0', right: '10px 0 0 10px' }[horizontal])};
   transform: ${({ horizontal, hidden }) => (hidden
     ? ({ left: 'translateX(-24px)', right: 'translateX(-16px)' }[horizontal])
-    : ({ left: 'translateX(40px)', right: 'translateX(0px)' }[horizontal]))};
+    : ({ left: 'translateX(-40px)', right: 'translateX(0px)' }[horizontal]))};
   flex-direction: ${({ horizontal }) => ({ left: 'row', right: 'row-reverse' }[horizontal])};
   :hover {
     transform: ${({ horizontal }) => ({ left: 'translateX(0);', right: 'translateX(-40px);' }[horizontal])};

@@ -15,6 +15,7 @@ const MimicContent = () => {
     <Theme>
       <FontStyle />
       <Panel
+        position="left"
         hidden={hidden}
         toggleHidden={() => toggleHidden(true)}
         pinned={pinned}
@@ -29,10 +30,10 @@ const MimicContent = () => {
       <Tail
         hidden={hidden}
         onClick={() => toggleHidden(false)}
-        position={{ vertical: 'top', horizontal: 'right' }}
+        position={{ vertical: 'center', horizontal: 'right' }}
       />
     </Theme>
   );
 };
 
-ReactDOM.render((<MimicContent />), addDom());
+ReactDOM.render((<MimicContent />), addDom('mimic_dictionary'));
