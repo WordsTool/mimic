@@ -31,6 +31,7 @@ const StyledPanelControl = styled(PanelControl)<PanelControlPropsType>`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   border: ${({ theme, active }) => (active ? `1px solid ${theme.palette.primary.main}` : `1px dashed ${theme.palette.text.light}`)};
   svg {
     transform: ${({ value }) => (value === 'left' ? 'rotate(180deg)' : '')};
@@ -60,21 +61,22 @@ TailControl.defaultProps = {
 };
 
 const StylesTailControl = styled(TailControl)<TailControlPropsType>`
-  width: 24px;
+  width: 20px;
   height: 24px;
-  text-align: ${({ horizontal }) => horizontal};  
+  justify-content: ${({ horizontal }) => ({ left: 'flex-start', right: 'flex-end' }[horizontal])};  
   border-radius: ${({ horizontal }) => ({ left: '0 4px 4px 0', right: '4px 0 0 4px' }[horizontal])};
   position: absolute;
   left: ${({ horizontal }) => ({ left: '0', right: '100%' }[horizontal])};;
-  margin-left: ${({ horizontal }) => ({ left: '0', right: '-24px' }[horizontal])};;
+  margin-left: ${({ horizontal }) => ({ left: '0', right: '-20px' }[horizontal])};;
   top: ${({ vertical }) => ({ top: '0', center: '50%', bottom: '100%' }[vertical])};;
   margin-top: ${({ vertical }) => ({ top: '0', center: '-12px', bottom: '-24px' }[vertical])};;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   :hover {
     background-color: ${({ theme }) => theme.palette.primary.light};
   }
   div {
-    margin: 9px 0 0 0;
-    display: inline-block;
     width: 8px;
     height: 6px;
     border-radius: ${({ horizontal }) => (horizontal === 'left' ? '0 2px 2px 0' : '2px 0 0 2px')};

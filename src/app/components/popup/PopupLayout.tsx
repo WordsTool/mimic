@@ -12,7 +12,7 @@ type PopupLayoutPropsType = {
 
 const Container = styled.div`
   width: 420px;
-  height: 360px;
+  height: 380px;
   display: flex;
   overflow: hidden;
   flex-direction: column;

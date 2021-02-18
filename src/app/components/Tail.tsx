@@ -12,9 +12,9 @@ type TailPosition = {
 };
 
 const verticalPositions: { top: string, center: string, bottom: string } = {
-  top: '25%',
+  top: '20%',
   center: '50%',
-  bottom: '75%',
+  bottom: '80%',
 };
 
 const Container = styled.div<{ vertical: VerticalPosition, horizontal: HorizontalType, isHidden: boolean }>`

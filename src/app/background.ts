@@ -7,7 +7,7 @@ import UpdateCommonSettings = mimic.UpdateCommonSettings;
 import DictionariesConfig = mimic.DictionariesConfig;
 
 const commonSettings: CommonSettingsType = {
-  disabled: true,
+  disabled: false,
   dictionaries,
   ui: {
     panel: 'left',
