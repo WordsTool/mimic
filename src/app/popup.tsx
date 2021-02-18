@@ -1,35 +1,39 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React, { useEffect, useState } from 'react';
+import { render } from 'react-dom';
+import Messenger from './core/Messenger';
+import PopupApp from './components/popup/PopupApp';
+import CommonSettingsType = mimic.CommonSettingsType;
+import UpdateCommonSettings = mimic.UpdateCommonSettings;
 
-import SortableList from './components/popup/SortableList';
-import FontStyle from './styles/fonts';
-import 'rc-tabs/assets/index.css';
-
-import dictionaries from './dictionaries';
-import Theme from './components/Theme';
-import PopupLayout from './components/popup/PopupLayout';
-import Settings from './components/popup/Settings';
-import Help from './components/popup/Help';
-
-const Popup = () => (
-  <Theme>
-    <FontStyle />
-    <PopupLayout
-      settings={(
-        <Settings />
-      )}
-      dictionaries={(
-        <SortableList list={dictionaries} />
-      )}
-      help={(
-        <Help />
-      )}
-    />
-  </Theme>
-);
-
-chrome.runtime.sendMessage(chrome.runtime.id, { source: 'popup', hello: 'from popup' }, {}, (response) => {
-  console.log(response);
+const messenger = new Messenger({
+  listen: [],
 });
 
-ReactDOM.render(<Popup />, document.getElementById('root'));
+const Root = () => {
+  const [commonSettings, setCommonSettings] = useState<null | CommonSettingsType>(null);
+
+  useEffect(
+    () => {
+      messenger.request<CommonSettingsType>('get_common_settings', {}, (response) => {
+        setCommonSettings(response);
+      });
+    },
+    [],
+  );
+  const onChangeSettings = ({ name, value }: { name: 'disabled', value: boolean }) => {
+    setCommonSettings({ ...commonSettings, [name]: value });
+
+    messenger.request<any, UpdateCommonSettings>('update_common_settings', { [name]: value });
+  };
+
+  if (!commonSettings) return null;
+
+  return (
+    <PopupApp
+      {...commonSettings}
+      onChangeSettings={onChangeSettings}
+    />
+  );
+};
+
+render(<Root />, document.getElementById('root'));

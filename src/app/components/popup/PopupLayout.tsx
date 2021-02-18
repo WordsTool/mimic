@@ -22,6 +22,9 @@ const Container = styled.div`
     display: flex;
     flex: 1;
   }
+  .rc-tabs-tabpane{
+    outline: none;
+  }
   .rc-tabs-content-holder {
     display: flex;
     flex: 1;

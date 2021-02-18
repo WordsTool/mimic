@@ -48,7 +48,7 @@ const darkPalette: ColorPalette = {
   text: {
     light: 'rgba(255, 255, 255, 0.53)',
     main: 'rgba(255, 255, 255, 0.87)',
-    dark: 'rgba(255, 255, 255, 0.53)',
+    dark: 'rgba(255,255,255,0.53)',
   },
 };
 

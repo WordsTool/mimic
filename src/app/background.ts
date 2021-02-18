@@ -1,47 +1,77 @@
 import dictionaries from './dictionaries';
+import Messenger, { ContextType, MessengerOptions } from './core/Messenger';
+import ContentTabSettingsType = mimic.ContentTabSettingsType;
+import ContentInitialDataType = mimic.ContentInitialDataType;
+import CommonSettingsType = mimic.CommonSettingsType;
+import UpdateCommonSettings = mimic.UpdateCommonSettings;
+import DictionariesConfig = mimic.DictionariesConfig;
 
-const extensionId = chrome.runtime.id;
+const commonSettings: CommonSettingsType = {
+  disabled: true,
+  dictionaries,
+  ui: {
+    panel: 'left',
+    tail: {
+      horizontal: 'left',
+      vertical: 'center',
+    },
+  },
+};
 
-const defaultTabConfig = {
+const defaultTabConfig: ContentTabSettingsType = {
   pinned: false,
   phrase: '',
 };
 
+const dictionariesConfigs: DictionariesConfig[] = dictionaries
+  .map(({ id }) => ({ id, off: false }));
+
+console.log(dictionariesConfigs);
+
 const tabs: {
-  [key: number]: {
-    pinned: boolean,
-    phrase: string,
-  },
+  [key: number]: ContentTabSettingsType,
 } = {};
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+const getTabSettings = ({ tabId, sendResponse }: ContextType<any, ContentInitialDataType>) => {
+  if (!tabId) return;
 
-  console.log({ message });
-  if (sender.id !== extensionId) return;
+  const savedSettings = tabs[tabId] || {};
 
-  const tab: { id?: number } | null = sender.tab || null;
+  sendResponse({
+    ...defaultTabConfig,
+    ...savedSettings,
+    ...commonSettings,
+  });
+};
 
-  if (message.source === 'popup') {
-    sendResponse({ hello: 'form background' });
-  }
+const updateTabSettings = ({ tabId, data }: ContextType<ContentTabSettingsType>) => {
+  if (!tabId) return;
 
-  if (tab && tab.id) {
-    if (message.method === 'get') {
-      if (tabs[tab.id]) {
-        sendResponse({ dictionaries, ...tabs[sender.tab.id] });
-      } else {
-        tabs[tab.id] = { ...defaultTabConfig };
-        sendResponse({ dictionaries, ...defaultTabConfig });
-      }
-    }
+  const savedSettings = tabs[tabId] || {};
 
-    if (message.method === 'update') {
-      console.log({ message });
-      const { phrase, pinned } = message.data;
+  tabs[tabId] = { ...savedSettings, ...data };
+};
 
-      tabs[tab.id] = { phrase, pinned };
+const getCommonSettings = (ctx: ContextType<any, CommonSettingsType>) => {
+  ctx.sendResponse(commonSettings);
+};
 
-      sendResponse({ phrase, pinned });
-    }
-  }
-});
+const updateCommonSettings = (ctx: ContextType<UpdateCommonSettings>) => {
+  console.log(ctx.data);
+  Object.assign(commonSettings, ctx.data);
+
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  messenger.sentToTabs({ type: 'sync_tab_common_settings', data: commonSettings });
+  // sync_tab_common_settings
+};
+
+const options: MessengerOptions = {
+  listen: [
+    { type: 'get_tab_settings', controller: getTabSettings },
+    { type: 'update_tab_settings', controller: updateTabSettings },
+    { type: 'update_common_settings', controller: updateCommonSettings },
+    { type: 'get_common_settings', controller: getCommonSettings },
+  ],
+};
+
+const messenger = new Messenger(options);
