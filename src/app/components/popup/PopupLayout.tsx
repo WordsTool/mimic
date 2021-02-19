@@ -54,6 +54,11 @@ const Footer = styled.div`
   flex-direction: row;
   align-items: center;
   display: flex;
+  justify-content: space-between;
+`;
+
+const SupportImg = styled.img`
+  width: 144px;
 `;
 
 const PopupLayout = (props: PopupLayoutPropsType) => {
@@ -74,6 +79,10 @@ const PopupLayout = (props: PopupLayoutPropsType) => {
       </Tabs>
       <Footer>
         <PoweredBy size="small" />
+        {/* eslint-disable-next-line react/jsx-no-target-blank */}
+        <a href="https://patreon.com/mimicdictionary" target="_blank">
+          <SupportImg src="/images/support_patreon.svg" />
+        </a>
       </Footer>
     </Container>
   );
