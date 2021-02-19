@@ -33,6 +33,7 @@ const StyledPanelControl = styled(PanelControl)<PanelControlPropsType>`
   justify-content: center;
   cursor: pointer;
   border: ${({ theme, active }) => (active ? `1px solid ${theme.palette.primary.main}` : `1px dashed ${theme.palette.text.light}`)};
+  border-radius: ${({ value }) => ({ left: '4px 0 0 4px', right: '0 4px 4px 0' }[value])};
   svg {
     transform: ${({ value }) => (value === 'left' ? 'rotate(180deg)' : '')};
     * {

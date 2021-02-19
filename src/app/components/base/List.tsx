@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
 const List = styled.div`
@@ -22,7 +23,7 @@ export const ListItem = styled.div<{ active?: boolean, onClick?: () => void }>`
   }
 `;
 
-export const ListItemAction = styled.div<{ onClick?: () => void }>`
+export const ListItemAction = styled.div<{ onClick?: (e: MouseEvent) => void }>`
   cursor: ${({ onClick }) => (typeof onClick === 'function' ? 'pointer' : 'auto')}; 
   self-align: flex-end;
   * {

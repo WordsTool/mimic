@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import React, { MouseEvent } from 'react';
+import styled from 'styled-components';
 import Typography from '../base/Typography';
 import Logo from '../../icons/Logo';
 import List, { ListItem, ListItemAction, ListItemContent } from '../base/List';
@@ -145,7 +145,13 @@ const Panel = (props: PanelPropsType) => {
                     {name}
                   </Typography>
                 </ListItemContent>
-                <ListItemAction onClick={() => onPressItemNew(url)}>
+                <ListItemAction
+                  onClick={(e: MouseEvent) => {
+                    onPressItemNew(url);
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                >
                   <OpenInNewIcon />
                 </ListItemAction>
               </ListItem>
