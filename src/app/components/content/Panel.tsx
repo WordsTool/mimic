@@ -42,7 +42,7 @@ const Container = styled.div<{ position: PositionType, isHidden: boolean }>`
   transition: transform 0.1s ease-in-out;
   top: 0;
   height: 100%;
-  z-index: 100000;
+  z-index: 2147483638;
   background-color: ${({ theme }) => theme.palette.surface.main};
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,.2), 0px 1px 18px 0px rgba(0,0,0,.12), 0px 6px 10px 0px rgba(0,0,0,.14);
 `;
@@ -91,7 +91,7 @@ const DictList = styled(List)`
 `;
 
 const PinAndUnpinIcon = styled(PinIcon)<{ pinned: boolean }>`
-  transform: ${({ pinned }) => (pinned ? 'rotate(45deg)' : 'rotate(0deg)')}; 
+  transform: ${({ pinned }) => (pinned ? 'rotate(0deg)' : 'rotate(45deg)')}; 
 `;
 
 const Panel = (props: PanelPropsType) => {

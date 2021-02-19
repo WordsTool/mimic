@@ -31,9 +31,13 @@ const Root = () => {
     messenger.request('update_tab_settings', syncData);
   };
 
+  const openInNew = (url: string) => {
+    messenger.request('open_in_new_tab', { url });
+  };
+
   if (!data || data.disabled) return null;
 
-  return (<ContentApp {...data} syncTabData={syncTabData} />);
+  return (<ContentApp {...data} syncTabData={syncTabData} openInNew={openInNew} />);
 };
 
 render((<Root />), addDom('mimic_dictionary'));

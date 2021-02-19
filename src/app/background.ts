@@ -5,6 +5,8 @@ import ContentInitialDataType = mimic.ContentInitialDataType;
 import CommonSettingsType = mimic.CommonSettingsType;
 import UpdateCommonSettings = mimic.UpdateCommonSettings;
 import DictionariesConfig = mimic.DictionariesConfig;
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
+import Tab = chrome.tabs.Tab;
 
 const commonSettings: CommonSettingsType = {
   disabled: false,
@@ -65,12 +67,40 @@ const updateCommonSettings = (ctx: ContextType<UpdateCommonSettings>) => {
   // sync_tab_common_settings
 };
 
+const getCurrentTab = (): Promise<Tab | undefined> => new Promise((resolve) => {
+  chrome.tabs.getCurrent((tab) => {
+    resolve(tab);
+  });
+});
+
+const openInNewTab = async ({ tabId, data, sender }: ContextType<{ url: string }>) => {
+  const savedSettings = tabs[tabId];
+  const { url } = data;
+  const currentTab = await getCurrentTab() || sender.tab;
+
+  const senderTabIndex = currentTab ? currentTab.index : null;
+  const options: { active: boolean, url: string, index?: number } = { active: true, url };
+
+  if (typeof senderTabIndex === 'number') {
+    options.index = senderTabIndex + 1;
+  }
+
+  console.log({ senderTabIndex, options });
+
+  chrome.tabs.create(options, (tab: Tab) => {
+    if (savedSettings) {
+      tabs[tab.id] = { ...savedSettings };
+    }
+  });
+};
+
 const options: MessengerOptions = {
   listen: [
     { type: 'get_tab_settings', controller: getTabSettings },
     { type: 'update_tab_settings', controller: updateTabSettings },
     { type: 'update_common_settings', controller: updateCommonSettings },
     { type: 'get_common_settings', controller: getCommonSettings },
+    { type: 'open_in_new_tab', controller: openInNewTab },
   ],
 };
 

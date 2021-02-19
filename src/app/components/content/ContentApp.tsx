@@ -12,6 +12,7 @@ import ContentTabSettingsType = mimic.ContentTabSettingsType;
 
 type ContentAppPropsType = ContentInitialDataType & {
   syncTabData: (syncData: ContentTabSettingsType) => void,
+  openInNew: (url: string) => void,
 };
 
 const ContentApp = (props: ContentAppPropsType) => {
@@ -21,8 +22,9 @@ const ContentApp = (props: ContentAppPropsType) => {
     phrase: initialPhrase,
     ui,
     syncTabData,
+    openInNew,
   } = props;
-  const [hidden, toggleHidden] = React.useState(initialPinned);
+  const [hidden, toggleHidden] = React.useState(!initialPinned);
   const [pinned, togglePinned] = React.useState<boolean>(initialPinned);
   const [phrase, setPhrase] = React.useState<string>(initialPhrase);
 
@@ -58,7 +60,7 @@ const ContentApp = (props: ContentAppPropsType) => {
   );
   const onPressItemNew = React.useCallback(
     (url: string) => {
-      window.open(getDictionaryUrl(url, phrase), '_blank');
+      openInNew(getDictionaryUrl(url, phrase));
     },
     [phrase],
   );

@@ -20,7 +20,8 @@
     "persistent": true
   },
   "permissions": [
-    "https://*/*"
+    "https://*/*",
+    "tabs"
   ],
   "content_scripts": [
     {

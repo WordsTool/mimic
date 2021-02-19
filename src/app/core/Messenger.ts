@@ -4,6 +4,7 @@ export interface ContextType<A=any, B=any> {
   tabId: number,
   data: A,
   sendResponse: (response: B) => void,
+  sender: MessageSender,
 }
 
 export interface MessengerListener {
@@ -44,6 +45,7 @@ export default class Messenger {
       controller({
         tabId: tab ? tab.id : null,
         data,
+        sender,
         sendResponse,
       });
     });
