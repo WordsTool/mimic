@@ -7,11 +7,15 @@ import SortableList from './SortableList';
 import dictionaries from '../../dictionaries';
 import Help from './Help';
 import 'rc-tabs/assets/index.css';
-import CommonSettingsType = mimic.CommonSettingsType;
+import CommonSettingsWithConfig = mimic.CommonSettingsWithConfig;
 
-type PopupAppPropsType = CommonSettingsType & { onChangeSettings: (e: { name: 'disabled', value: boolean }) => void };
+type PopupAppPropsType = CommonSettingsWithConfig & {
+  onChangeSettings: (e: { name: 'disabled', value: boolean }) => void
+};
 
-const PopupApp = ({ ui, disabled, onChangeSettings }: PopupAppPropsType) => (
+const PopupApp = ({
+  ui, disabled, onChangeSettings, dictionariesConfig,
+}: PopupAppPropsType) => (
   <Theme>
     <FontStyle />
     <PopupLayout
@@ -22,7 +26,11 @@ const PopupApp = ({ ui, disabled, onChangeSettings }: PopupAppPropsType) => (
         />
       )}
       dictionaries={(
-        <SortableList list={dictionaries} />
+        <SortableList
+          list={dictionaries}
+          config={dictionariesConfig}
+          onChange={onChangeSettings}
+        />
       )}
       help={(
         <Help />

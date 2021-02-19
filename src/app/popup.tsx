@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import Messenger from './core/Messenger';
 import PopupApp from './components/popup/PopupApp';
-import CommonSettingsType = mimic.CommonSettingsType;
 import UpdateCommonSettings = mimic.UpdateCommonSettings;
+import CommonSettingsWithConfig = mimic.CommonSettingsWithConfig;
 
 const messenger = new Messenger({
   listen: [],
 });
 
 const Root = () => {
-  const [commonSettings, setCommonSettings] = useState<null | CommonSettingsType>(null);
+  const [commonSettings, setCommonSettings] = useState<null | CommonSettingsWithConfig>(null);
 
   useEffect(
     () => {
-      messenger.request<CommonSettingsType>('get_common_settings', {}, (response) => {
+      messenger.request<CommonSettingsWithConfig>('get_common_settings', {}, (response) => {
         setCommonSettings(response);
       });
     },

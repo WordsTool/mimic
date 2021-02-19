@@ -25,7 +25,7 @@ declare namespace mimic {
     tail: UITailPosition,
   };
 
-  export interface DictionariesConfig {
+  export interface DictionaryConfig {
     id: string,
     off: boolean,
   }
@@ -36,9 +36,16 @@ declare namespace mimic {
     ui: UIPosition,
   }
 
+  export interface CommonSettingsWithConfig {
+    disabled: boolean,
+    dictionaries: Dictionary[],
+    ui: UIPosition,
+    dictionariesConfig: DictionaryConfig[],
+  }
+
   export interface UpdateCommonSettings {
     disabled?: boolean,
-    dictionaries_config?: DictionariesConfig[],
+    dictionariesConfig?: DictionaryConfig[],
   }
 
   export interface ContentTabSettingsType {
@@ -50,5 +57,7 @@ declare namespace mimic {
 }
 
 declare namespace mimic.popup {
-  export type EventCommonSetting = { name: 'disabled', value: boolean } | { name: 'ui', value: UIPosition };
+  export type EventCommonSetting = { name: 'disabled', value: boolean }
+  | { name: 'ui', value: UIPosition }
+  | { name: 'dictionariesConfig', value: DictionaryConfig[] };
 }

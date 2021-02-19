@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Typography from '../base/Typography';
@@ -7,6 +7,10 @@ import DragIcon from '../../icons/DragIcon';
 import List, {
   ListItem, ListItemAction, ListItemContent, ListItemIcon,
 } from '../base/List';
+import useIsMounted from '../common/useIsMounted';
+import Dictionary = mimic.Dictionary;
+import DictionaryConfig = mimic.DictionaryConfig;
+import EventCommonSetting = mimic.popup.EventCommonSetting;
 
 const ListContainer = styled(List)<{ isDraggingOver: boolean }>`
   background-color: ${({ isDraggingOver, theme }) => (isDraggingOver && theme.palette.surface.light)};
@@ -17,9 +21,29 @@ const SortableListItem = styled(ListItem)<{ isDragging: boolean }>`
   background-color: ${(props) => props.theme.palette.surface.main};
 `;
 
-const SortableList = ({ list }: { list: { name: string }[] }) => {
-  const [currentList, updateList] = React.useState(
-    list.map((item) => ({ ...item, enabled: true })),
+type SortableListPropsType = {
+  list: Dictionary[],
+  config: DictionaryConfig[],
+  onChange: (e: EventCommonSetting) => void,
+};
+
+const SortableList = ({ list, config, onChange }: SortableListPropsType) => {
+  const [currentList, updateList] = useState<{ id: string, name: string, off: boolean }[]>(
+    config.map(({ id, off }) => {
+      const { name } = list.find(({ id: itemId }) => id === itemId);
+      return { id, name, off };
+    }),
+  );
+
+  const isMounted = useIsMounted();
+  useEffect(
+    () => {
+      if (isMounted) {
+        const newConfig = currentList.map(({ id, off }) => ({ id, off }));
+        onChange({ name: 'dictionariesConfig', value: newConfig });
+      }
+    },
+    [currentList],
   );
 
   const reorder = (souce: number, dist: number) => {
@@ -31,7 +55,7 @@ const SortableList = ({ list }: { list: { name: string }[] }) => {
   };
 
   const toggleEnabled = (index: number) => {
-    currentList[index].enabled = !currentList[index].enabled;
+    currentList[index].off = !currentList[index].off;
 
     updateList([...currentList]);
   };
@@ -56,7 +80,7 @@ const SortableList = ({ list }: { list: { name: string }[] }) => {
             isDraggingOver={isDraggingOver}
             ref={innerRef}
           >
-            {currentList.map(({ name, enabled }, index) => (
+            {currentList.map(({ name, off }, index) => (
               <Draggable key={name} draggableId={name} index={index}>
                 {(
                   { draggableProps, dragHandleProps, innerRef: draggableInnerRef },
@@ -78,7 +102,7 @@ const SortableList = ({ list }: { list: { name: string }[] }) => {
                       </Typography>
                     </ListItemContent>
                     <ListItemAction>
-                      <Switch checked={enabled} onChange={() => toggleEnabled(index)} />
+                      <Switch checked={!off} onChange={() => toggleEnabled(index)} />
                     </ListItemAction>
                   </SortableListItem>
                 )}

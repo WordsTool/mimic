@@ -1,12 +1,15 @@
 import dictionaries from './dictionaries';
+import DictionaryStorage from './core/Dictionaries';
 import Messenger, { ContextType, MessengerOptions } from './core/Messenger';
 import ContentTabSettingsType = mimic.ContentTabSettingsType;
 import ContentInitialDataType = mimic.ContentInitialDataType;
 import CommonSettingsType = mimic.CommonSettingsType;
 import UpdateCommonSettings = mimic.UpdateCommonSettings;
-import DictionariesConfig = mimic.DictionariesConfig;
+import DictionaryConfig = mimic.DictionaryConfig;
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 import Tab = chrome.tabs.Tab;
+
+const dictStore = new DictionaryStorage({ list: dictionaries, listConfig: [] });
 
 const commonSettings: CommonSettingsType = {
   disabled: false,
@@ -25,11 +28,6 @@ const defaultTabConfig: ContentTabSettingsType = {
   phrase: '',
 };
 
-const dictionariesConfigs: DictionariesConfig[] = dictionaries
-  .map(({ id }) => ({ id, off: false }));
-
-console.log(dictionariesConfigs);
-
 const tabs: {
   [key: number]: ContentTabSettingsType,
 } = {};
@@ -42,7 +40,10 @@ const getTabSettings = ({ tabId, sendResponse }: ContextType<any, ContentInitial
   sendResponse({
     ...defaultTabConfig,
     ...savedSettings,
-    ...commonSettings,
+    ...{
+      ...commonSettings,
+      dictionaries: dictStore.getActiveList(),
+    },
   });
 };
 
@@ -54,16 +55,30 @@ const updateTabSettings = ({ tabId, data }: ContextType<ContentTabSettingsType>)
   tabs[tabId] = { ...savedSettings, ...data };
 };
 
-const getCommonSettings = (ctx: ContextType<any, CommonSettingsType>) => {
-  ctx.sendResponse(commonSettings);
+const getCommonSettings = (
+  ctx: ContextType<any, CommonSettingsType & { dictionariesConfig: DictionaryConfig[] }>,
+) => {
+  ctx.sendResponse({
+    ...commonSettings,
+    dictionariesConfig: dictStore.dictionariesConfig,
+  });
 };
 
 const updateCommonSettings = (ctx: ContextType<UpdateCommonSettings>) => {
   console.log(ctx.data);
+  const newDictionariesConfig = ctx.data.dictionariesConfig;
+  delete ctx.data.dictionariesConfig;
   Object.assign(commonSettings, ctx.data);
 
+  if (newDictionariesConfig) {
+    dictStore.updateConfig(newDictionariesConfig);
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  messenger.sentToTabs({ type: 'sync_tab_common_settings', data: commonSettings });
+  messenger.sentToTabs({
+    type: 'sync_tab_common_settings',
+    data: { ...commonSettings, dictionaries: dictStore.getActiveList() },
+  });
   // sync_tab_common_settings
 };
 
@@ -84,8 +99,6 @@ const openInNewTab = async ({ tabId, data, sender }: ContextType<{ url: string }
   if (typeof senderTabIndex === 'number') {
     options.index = senderTabIndex + 1;
   }
-
-  console.log({ senderTabIndex, options });
 
   chrome.tabs.create(options, (tab: Tab) => {
     if (savedSettings) {
