@@ -8,7 +8,6 @@ let browserScheme: 'light' | 'dark' = 'light';
 
 try {
   browserScheme = prefersColorScheme().scheme;
-  console.log({ browserScheme });
 } catch (e) {
 }
 
