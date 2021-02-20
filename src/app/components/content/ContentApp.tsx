@@ -66,7 +66,7 @@ const ContentApp = (props: ContentAppPropsType) => {
   );
 
   return (
-    <Theme>
+    <Theme theme={ui.theme}>
       <FontStyle />
       <Panel
         position={ui.panel}

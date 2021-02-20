@@ -5,7 +5,7 @@ import Switch from '../base/Switch';
 import PositionControl from './PositionControl';
 import Divider from '../base/Divider';
 import EventCommonSetting = mimic.popup.EventCommonSetting;
-import UIPosition = mimic.UIPosition;
+import UIType = mimic.UIType;
 
 const Form = styled.div`
   padding: 12px 20px;
@@ -25,7 +25,7 @@ const FormItemDescription = styled.div`
 const FormItemControl = styled.div``;
 
 type SettingsPropsType = {
-  data: { disabled: boolean, ui: UIPosition },
+  data: { disabled: boolean, ui: UIType },
   onChange: (e: EventCommonSetting) => void
 };
 
@@ -59,8 +59,30 @@ const Settings = ({ data: { disabled, ui }, onChange }: SettingsPropsType) => (
       <FormItemControl>
         <PositionControl
           ui={ui}
-          onChange={(value: UIPosition) => {
+          onChange={(value: UIType) => {
             onChange({ name: 'ui', value });
+          }}
+        />
+      </FormItemControl>
+    </FormItem>
+    <Divider />
+    <FormItem>
+      <FormItemDescription>
+        <Typography variant="subtitle1">
+          Dark theme
+        </Typography>
+      </FormItemDescription>
+      <FormItemControl>
+        <Switch
+          checked={ui.theme === 'dark'}
+          onChange={() => {
+            onChange({
+              name: 'ui',
+              value: {
+                ...ui,
+                theme: ui.theme === 'dark' ? 'light' : 'dark',
+              },
+            });
           }}
         />
       </FormItemControl>

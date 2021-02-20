@@ -15,6 +15,8 @@ declare namespace mimic {
 
   export type UIPanelPosition = UIHorizontalType;
 
+  export type UIColorSchemeType = 'dark' | 'light';
+
   export type UITailPosition = {
     horizontal: UIHorizontalType,
     vertical: UIVerticalType,
@@ -25,6 +27,9 @@ declare namespace mimic {
     tail: UITailPosition,
   };
 
+  export type UIThemeType = { theme: UIColorSchemeType };
+
+  export type UIType = UIPosition & UIThemeType;
   export interface DictionaryConfig {
     id: string,
     off: boolean,
@@ -33,13 +38,13 @@ declare namespace mimic {
   export interface CommonSettingsType {
     disabled: boolean,
     dictionaries: Dictionary[],
-    ui: UIPosition,
+    ui: UIType,
   }
 
   export interface CommonSettingsWithConfig {
     disabled: boolean,
     dictionaries: Dictionary[],
-    ui: UIPosition,
+    ui: UIType,
     dictionariesConfig: DictionaryConfig[],
   }
 
@@ -58,6 +63,6 @@ declare namespace mimic {
 
 declare namespace mimic.popup {
   export type EventCommonSetting = { name: 'disabled', value: boolean }
-  | { name: 'ui', value: UIPosition }
+  | { name: 'ui', value: UIType }
   | { name: 'dictionariesConfig', value: DictionaryConfig[] };
 }

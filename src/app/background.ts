@@ -20,6 +20,7 @@ const commonSettings: CommonSettingsType = {
       horizontal: 'left',
       vertical: 'center',
     },
+    theme: 'light',
   },
 };
 

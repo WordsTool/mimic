@@ -16,7 +16,7 @@ type PopupAppPropsType = CommonSettingsWithConfig & {
 const PopupApp = ({
   ui, disabled, onChangeSettings, dictionariesConfig,
 }: PopupAppPropsType) => (
-  <Theme>
+  <Theme theme={ui.theme}>
     <FontStyle />
     <PopupLayout
       settings={(
