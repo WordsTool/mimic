@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types,jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,max-len */
 import React from 'react';
 import styled from 'styled-components';
-import UIPosition = mimic.UIPosition;
+import UIType = mimic.UIType;
 import UIHorizontalType = mimic.UIHorizontalType;
 import UIVerticalType = mimic.UIVerticalType;
 import UITailPosition = mimic.UITailPosition;
@@ -92,8 +92,8 @@ const tailPositions: [UIHorizontalType, UIVerticalType][] = horizontalList
   .reduce((m, h) => [...m, ...verticalList.map((v) => [h, v])], []);
 
 type PositionControlPropsType = {
-  ui: UIPosition,
-  onChange: (ui: UIPosition) => void,
+  ui: UIType,
+  onChange: (ui: UIType) => void,
 };
 
 const Container = styled.div`
@@ -110,12 +110,12 @@ const TailsBlock = styled.div`
   border: ${({ theme }) => (`1px solid ${theme.palette.text.light}`)};
 `;
 
-const PositionControl = ({ ui: { tail, panel }, onChange }: PositionControlPropsType) => {
+const PositionControl = ({ ui: { tail, panel, theme }, onChange }: PositionControlPropsType) => {
   const getPanelControl = (side: UIHorizontalType) => (
     <StyledPanelControl
       active={panel === side}
       value={side}
-      onClick={() => onChange({ tail, panel: side })}
+      onClick={() => onChange({ tail, theme, panel: side })}
     />
   );
 
@@ -129,7 +129,7 @@ const PositionControl = ({ ui: { tail, panel }, onChange }: PositionControlProps
             horizontal={horizontal}
             active={tail.vertical === vertical && tail.horizontal === horizontal}
             onClick={() => {
-              onChange({ panel, tail: { vertical, horizontal } });
+              onChange({ panel, theme, tail: { vertical, horizontal } });
             }}
           />
         ))}
