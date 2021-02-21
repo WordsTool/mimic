@@ -9,6 +9,7 @@ nbproject
 .idea
 .node_history
 dump.rdb
+*.zip
 
 yarn-error.log
 npm-debug.log

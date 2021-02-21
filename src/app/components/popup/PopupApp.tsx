@@ -4,7 +4,6 @@ import FontStyle from '../../styles/fonts';
 import PopupLayout from './PopupLayout';
 import Settings from './Settings';
 import SortableList from './SortableList';
-import dictionaries from '../../dictionaries';
 import Help from './Help';
 import 'rc-tabs/assets/index.css';
 import CommonSettingsWithConfig = mimic.CommonSettingsWithConfig;
@@ -14,7 +13,7 @@ type PopupAppPropsType = CommonSettingsWithConfig & {
 };
 
 const PopupApp = ({
-  ui, disabled, onChangeSettings, dictionariesConfig,
+  ui, disabled, onChangeSettings, dictionariesConfig, dictionaries,
 }: PopupAppPropsType) => (
   <Theme theme={ui.theme}>
     <FontStyle />

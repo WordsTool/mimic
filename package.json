@@ -8,7 +8,7 @@
   "private": false,
   "scripts": {
     "start": "webpack --watch --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
@@ -30,6 +30,8 @@
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
+    "ajv": "^7.1.1",
+    "ajv-keywords": "^4.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^5.0.2",
     "eslint": "^7.20.0",

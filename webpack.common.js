@@ -1,5 +1,6 @@
 const path = require('path');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
+const ValidateDictionaryPlugin = require('./webpack/ValidateDictionaryPlugin');
 
 const styledComponentsTransformer = createStyledComponentsTransformer();
 
@@ -34,4 +35,8 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [
+    new ValidateDictionaryPlugin(path.resolve(__dirname, 'dictionaries.json')),
+  ],
 };

@@ -2,6 +2,11 @@ declare module 'css-prefers-color-scheme' {
   export default function fn(): { scheme: 'dark' | 'light' };
 }
 
+declare module 'dictionaries.json' {
+  const Value: { name: string, url: string, id: string }[];
+  export default Value;
+}
+
 declare namespace mimic {
   export interface Dictionary {
     id: string,

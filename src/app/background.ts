@@ -1,4 +1,4 @@
-import dictionaries from './dictionaries';
+import dictionaries from '../../dictionaries.json';
 import DictionaryStorage from './core/Dictionaries';
 import Messenger, { ContextType, MessengerOptions } from './core/Messenger';
 import ContentTabSettingsType = mimic.ContentTabSettingsType;
