@@ -1,8 +1,26 @@
-import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 const FontStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,400&family=Roboto:wght@400;500&display=swap');
+  @font-face {
+    font-family: Nunito-Light;
+    font-weight: 300;
+    src: url(chrome-extension://${chrome.runtime.id}/fonts/Nunito-Light.ttf);
+  }
+  @font-face {
+    font-family: Nunito;
+    font-weight: 400;
+    src: url(chrome-extension://${chrome.runtime.id}/fonts/Nunito-Regular.ttf);
+  }
+  @font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url(chrome-extension://${chrome.runtime.id}/fonts/Roboto-Regular.ttf);
+  }
+  @font-face {
+    font-family: Roboto-Medium;
+    font-weight: 500;
+    src: url(chrome-extension://${chrome.runtime.id}/fonts/Roboto-Medium.ttf);
+  }
 `;
 
 export default FontStyle;
