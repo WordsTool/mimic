@@ -13,7 +13,7 @@ class DictionaryStorage {
 
   private initConfig(listConfig: DictionaryConfig[]): DictionaryConfig[] {
     // init with default sort
-    if (listConfig.length === 0) {
+    if (!listConfig || listConfig.length === 0) {
       return this.list.map(({ id }) => ({ id, off: false }));
     }
     return listConfig;
@@ -25,6 +25,10 @@ class DictionaryStorage {
 
   public updateConfig(newListConfig: DictionaryConfig[]): void {
     this.listConfig = newListConfig;
+  }
+
+  public getList(): Dictionary[] {
+    return this.list;
   }
 
   public getActiveList(): Dictionary[] {

@@ -22,7 +22,8 @@
   "permissions": [
     "https://*/*",
     "tabs",
-    "contextMenus"
+    "contextMenus",
+    "storage"
   ],
   "content_scripts": [
     {

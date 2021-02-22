@@ -1,10 +1,8 @@
-import dictionaries from '../dictionaries.json';
-import CommonSettingsType = mimic.CommonSettingsType;
 import ContentTabSettingsType = mimic.ContentTabSettingsType;
+import BaseSettings = mimic.BaseSettings;
 
-export const commonSettings: CommonSettingsType = {
+export const commonSettings: BaseSettings = {
   disabled: false,
-  dictionaries,
   ui: {
     panel: 'left',
     tail: {

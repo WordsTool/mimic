@@ -40,21 +40,26 @@ declare namespace mimic {
     off: boolean,
   }
 
-  export interface CommonSettingsType {
+  export type BaseSettings = {
     disabled: boolean,
-    dictionaries: Dictionary[],
     ui: UIType,
-  }
+  };
 
-  export interface CommonSettingsWithConfig {
-    disabled: boolean,
+  export type CommonSettingsType = BaseSettings & {
     dictionaries: Dictionary[],
-    ui: UIType,
+  };
+
+  export type StorageSettingsType = BaseSettings & {
     dictionariesConfig: DictionaryConfig[],
-  }
+  };
+
+  export type CommonSettingsWithConfig = StorageSettingsType & {
+    dictionaries: Dictionary[],
+  };
 
   export interface UpdateCommonSettings {
     disabled?: boolean,
+    ui?: UIType,
     dictionariesConfig?: DictionaryConfig[],
   }
 
