@@ -29,6 +29,12 @@
   "content_panel_main_input_placeholder": {
     "message": "Enter phrase"
   },
+  "content_panel_this_tab_title": {
+    "message": "Open dictionary in this tab"
+  },
+  "content_panel_new_tab_title": {
+    "message": "Open dictionary in new tab"
+  },
   "content_panel_pin_button_title": {
     "message": "Pin panel"
   },

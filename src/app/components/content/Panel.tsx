@@ -96,6 +96,24 @@ const PinAndUnpinIcon = styled(PinIcon)<{ pinned: boolean }>`
   transform: ${({ pinned }) => (pinned ? 'rotate(0deg)' : 'rotate(45deg)')}; 
 `;
 
+const NewTabActionButton = styled(IconButton)`
+  padding: 12px 12px 12px 12px;
+  margin: 0 -12px 0 0;
+  border-radius: 0 6px 6px 0;
+  :hover {
+    background-color: ${({ theme }) => theme.palette.highlight.hover}!important;
+  }
+`;
+
+const DictionaryListItem = styled(ListItem)`
+  :hover {
+    ${NewTabActionButton} {
+      background-color: ${({ active, theme }) => !active && theme.palette.surface.light};
+    }
+  }
+`;
+
+
 const Panel = (props: PanelPropsType) => {
   const {
     dictionaries,
@@ -141,13 +159,19 @@ const Panel = (props: PanelPropsType) => {
           </Form>
           <DictList>
             {dictionaries.map(({ name, active, url }) => (
-              <ListItem key={name} active={active} onClick={() => onPressItem(url)}>
+              <DictionaryListItem
+                title={i18n('content_panel_this_tab_title')}
+                key={name}
+                active={active}
+                onClick={() => onPressItem(url)}
+              >
                 <ListItemContent>
                   <Typography variant="subtitle1">
                     {name}
                   </Typography>
                 </ListItemContent>
-                <ListItemAction
+                <NewTabActionButton
+                  title={i18n('content_panel_new_tab_title')}
                   onClick={(e: MouseEvent) => {
                     onPressItemNew(url);
                     e.preventDefault();
@@ -155,8 +179,8 @@ const Panel = (props: PanelPropsType) => {
                   }}
                 >
                   <OpenInNewIcon />
-                </ListItemAction>
-              </ListItem>
+                </NewTabActionButton>
+              </DictionaryListItem>
             ))}
           </DictList>
           <Footer>
