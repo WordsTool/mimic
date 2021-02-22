@@ -32,7 +32,6 @@ export default class Messenger {
 
   // eslint-disable-next-line max-len
   private onRuntimeMessage(message: any | { type: string, data: any }, sender: MessageSender, sendResponse: (response?: any) => void) {
-    console.log('on message: ', { message, sender });
     if (sender.id !== this.extensionId) return;
     if (typeof message !== 'object') return;
 
