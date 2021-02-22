@@ -54,6 +54,7 @@ class MimicMenu {
     this.currentDictionaries.forEach((id) => {
       chrome.contextMenus.remove(id);
     });
+    this.currentDictionaries = [];
   }
 
   init({ dictionaries, onPressAdd, onPressDictionary }: MimicMenuInitOptions): void {
