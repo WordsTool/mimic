@@ -1,5 +1,5 @@
 {
-  "name": "Mimic dictionary",
+  "name": "__MSG_app_name__",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Open online dictionaries",
@@ -30,5 +30,6 @@
       "all_frames": false,
       "js": ["js/content.js"]
     }
-  ]
+  ],
+  "default_locale": "en"
 }

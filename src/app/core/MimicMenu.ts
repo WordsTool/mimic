@@ -1,3 +1,4 @@
+import i18n from '../utils/i18n';
 import Dictionary = mimic.Dictionary;
 import OnClickData = chrome.contextMenus.OnClickData;
 import Tab = chrome.tabs.Tab;
@@ -26,7 +27,7 @@ class MimicMenu {
   private createAddItem() {
     chrome.contextMenus.create({
       id: this.addId,
-      title: 'Add phrase',
+      title: i18n('context_menu_add_phrase'),
       contexts: ['selection'],
       onclick: (...args) => this.onPressAdd(...args),
     });

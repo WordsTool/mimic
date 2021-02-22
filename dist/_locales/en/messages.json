@@ -1,0 +1,41 @@
+{
+  "app_name": {
+    "message": "Mimic dictionary"
+  },
+  "popup_settings_tab_title": {
+    "message": "settings"
+  },
+  "popup_settings_show_label": {
+    "message": "Show panel and tail"
+  },
+  "popup_settings_position_label": {
+    "message": "Position for tail and panel"
+  },
+  "popup_settings_position_caption": {
+    "message": "Select position of panel by horizontal and select position of tail by horizontal and vertical"
+  },
+  "popup_settings_theme_label": {
+    "message": "Dark theme"
+  },
+  "popup_dictionaries_tab_title": {
+    "message": "Dictionaries"
+  },
+  "popup_help_tab_title": {
+    "message": "Dictionaries"
+  },
+  "popup_help_get_started_title": {
+    "message": "Get started"
+  },
+  "content_panel_main_input_placeholder": {
+    "message": "Enter phrase"
+  },
+  "content_panel_pin_button_title": {
+    "message": "Pin panel"
+  },
+  "content_panel_unpin_button_title": {
+    "message": "Unpin panel"
+  },
+  "context_menu_add_phrase": {
+    "message": "Add phrase"
+  }
+}

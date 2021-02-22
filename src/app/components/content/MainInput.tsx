@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import i18n from '../../utils/i18n';
 
 const InputWrapper = styled.div`
   padding: 0;
@@ -35,7 +36,7 @@ const MainInput = ({ onChange, value }: { value: string, onChange: (phrase: stri
       <InputField
         value={value}
         autoComplete="on"
-        placeholder="Enter phrase"
+        placeholder={i18n('content_panel_main_input_placeholder')}
         onChange={handleChange}
       />
     </InputWrapper>

@@ -8,6 +8,7 @@ import OpenInNewIcon from '../../icons/OpenInNewIcon';
 import CloseIcon from '../../icons/CloseIcon';
 import PoweredBy from '../common/PoweredBy';
 import IconButton from '../base/IconButton';
+import i18n from '../../utils/i18n';
 
 type PositionType = 'right' | 'left';
 type DictionaryItem = {
@@ -76,6 +77,7 @@ const HeadLogo = styled(Logo)`
 const Title = styled(Typography)`
   font-size: 16px;  
   margin: 0 0 0 16px;
+  text-transform: lowercase;
 `;
 const CloseButton = styled(IconButton)`
   position: absolute;
@@ -128,7 +130,7 @@ const Panel = (props: PanelPropsType) => {
           <Head>
             <HeadLogo />
             <Title variant="subtitle1">
-              mimic dictionary
+              {i18n('app_name')}
             </Title>
             <CloseButton onClick={toggleHidden}>
               <CloseIcon />
@@ -159,7 +161,10 @@ const Panel = (props: PanelPropsType) => {
           </DictList>
           <Footer>
             <PoweredBy />
-            <IconButton onClick={() => togglePinned()}>
+            <IconButton
+              onClick={() => togglePinned()}
+              title={pinned ? i18n('content_panel_unpin_button_title') : i18n('content_panel_pin_button_title')}
+            >
               <PinAndUnpinIcon pinned={pinned} />
             </IconButton>
           </Footer>

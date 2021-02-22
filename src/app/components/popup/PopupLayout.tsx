@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Tabs, { TabPane } from 'rc-tabs';
 import { getStyle } from '../base/Typography';
 import PoweredBy from '../common/PoweredBy';
+import i18n from '../../utils/i18n';
 
 type PopupLayoutPropsType = {
   settings: React.ReactNode,
@@ -67,13 +68,13 @@ const PopupLayout = (props: PopupLayoutPropsType) => {
   return (
     <Container>
       <Tabs>
-        <TabPane tab="Settings" key="1">
+        <TabPane tab={i18n('popup_settings_tab_title')} key="1">
           {settings}
         </TabPane>
-        <TabPane tab="Dictionaries" key="2">
+        <TabPane tab={i18n('popup_dictionaries_tab_title')} key="2">
           {dictionaries}
         </TabPane>
-        <TabPane tab="Help" key="3">
+        <TabPane tab={i18n('popup_help_tab_title')} key="3">
           {help}
         </TabPane>
       </Tabs>
