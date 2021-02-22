@@ -75,5 +75,3 @@ export default class Messenger {
     });
   }
 }
-
-console.log(chrome.runtime.onMessage.addListener);
