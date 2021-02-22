@@ -125,6 +125,7 @@ const PositionControl = ({ ui: { tail, panel, theme }, onChange }: PositionContr
       <TailsBlock>
         {tailPositions.map(([horizontal, vertical]) => (
           <StylesTailControl
+            key={`${horizontal}_${vertical}`}
             vertical={vertical}
             horizontal={horizontal}
             active={tail.vertical === vertical && tail.horizontal === horizontal}
