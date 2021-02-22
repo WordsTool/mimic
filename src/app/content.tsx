@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { render } from 'react-dom';
 import addDom from './utils/addDom';
 import ContentApp from './components/content/ContentApp';
@@ -12,12 +12,16 @@ const messenger = new Messenger({});
 const Root = () => {
   const [data, setData] = useState<ContentInitialDataType | null>(null);
 
+  const syncData = useRef(data);
+
+  syncData.current = data;
+
   useEffect(
     () => {
       messenger.addListener({
         type: 'sync_tab_common_settings',
         controller: (ctx: ContextType<CommonSettingsType>) => {
-          setData({ ...data, ...ctx.data });
+          setData({ ...syncData.current, ...ctx.data });
         },
       });
       messenger.request<ContentInitialDataType>('get_tab_settings', {}, (res) => {
@@ -27,8 +31,8 @@ const Root = () => {
     [],
   );
 
-  const syncTabData = (syncData: ContentTabSettingsType) => {
-    messenger.request('update_tab_settings', syncData);
+  const syncTabData = (newSyncData: ContentTabSettingsType) => {
+    messenger.request('update_tab_settings', newSyncData);
   };
 
   const openInNew = (url: string) => {

@@ -10,7 +10,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }]
   },
   "overrides": [
     {

@@ -39,6 +39,13 @@ const ContentApp = (props: ContentAppPropsType) => {
 
   React.useEffect(
     () => {
+      if (isMounted && initialPhrase) setPhrase(initialPhrase);
+    },
+    [initialPhrase],
+  );
+
+  React.useEffect(
+    () => {
       if (isMounted) {
         syncTabData({ pinned, phrase });
       }

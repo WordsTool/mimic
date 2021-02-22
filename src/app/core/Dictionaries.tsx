@@ -23,7 +23,7 @@ class DictionaryStorage {
     return this.listConfig;
   }
 
-  public updateConfig(newListConfig: DictionaryConfig[]) {
+  public updateConfig(newListConfig: DictionaryConfig[]): void {
     this.listConfig = newListConfig;
   }
 

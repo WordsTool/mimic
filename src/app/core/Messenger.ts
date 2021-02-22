@@ -21,8 +21,8 @@ export default class Messenger {
 
   private readonly extensionId: string;
 
-  constructor(options: MessengerOptions) {
-    const { listen } = options;
+  constructor(options?: MessengerOptions) {
+    const { listen } = options || {};
     this.extensionId = chrome.runtime.id;
 
     this.listeners = listen ? [...listen] : [];
@@ -53,6 +53,10 @@ export default class Messenger {
 
   public addListener(listener: MessengerListener): void {
     this.listeners.push(listener);
+  }
+
+  public addListeners(listeners: MessengerListener[]): void {
+    listeners.forEach((listener) => this.addListener(listener));
   }
 
   private subscribeToRuntime() {
