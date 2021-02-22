@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Typography from '../base/Typography';
@@ -7,7 +7,6 @@ import DragIcon from '../../icons/DragIcon';
 import List, {
   ListItem, ListItemAction, ListItemContent, ListItemIcon,
 } from '../base/List';
-import useIsMounted from '../common/useIsMounted';
 import Dictionary = mimic.Dictionary;
 import DictionaryConfig = mimic.DictionaryConfig;
 import EventCommonSetting = mimic.popup.EventCommonSetting;
@@ -35,21 +34,14 @@ const SortableList = ({ list, config, onChange }: SortableListPropsType) => {
     }),
   );
 
-  const isMounted = useIsMounted();
-  useEffect(
-    () => {
-      if (isMounted) {
-        const newConfig = currentList.map(({ id, off }) => ({ id, off }));
-        onChange({ name: 'dictionariesConfig', value: newConfig });
-      }
-    },
-    [currentList],
-  );
 
   const reorder = (souce: number, dist: number) => {
     const result = Array.from(currentList);
     const [removed] = result.splice(souce, 1);
     result.splice(dist, 0, removed);
+
+    const newConfig = result.map(({ id, off }) => ({ id, off }));
+    onChange({ name: 'dictionariesConfig', value: newConfig });
 
     updateList(result);
   };
@@ -70,6 +62,7 @@ const SortableList = ({ list, config, onChange }: SortableListPropsType) => {
     },
     [currentList],
   );
+
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
