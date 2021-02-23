@@ -1,8 +1,8 @@
-import React, { MouseEvent } from 'react';
+import React, { FunctionComponent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import Typography from '../base/Typography';
 import Logo from '../../icons/Logo';
-import List, { ListItem, ListItemAction, ListItemContent } from '../base/List';
+import List, { ListItem, ListItemContent } from '../base/List';
 import PinIcon from '../../icons/PinIcon';
 import OpenInNewIcon from '../../icons/OpenInNewIcon';
 import CloseIcon from '../../icons/CloseIcon';
@@ -114,7 +114,7 @@ const DictionaryListItem = styled(ListItem)`
 `;
 
 
-const Panel = (props: PanelPropsType) => {
+const Panel: FunctionComponent<PanelPropsType> = (props: PanelPropsType) => {
   const {
     dictionaries,
     isHidden,
@@ -162,6 +162,9 @@ const Panel = (props: PanelPropsType) => {
               <DictionaryListItem
                 title={i18n('content_panel_this_tab_title')}
                 key={name}
+                ref={(ref) => {
+                  if (active && ref) ref.scrollIntoView();
+                }}
                 active={active}
                 onClick={() => onPressItem(url)}
               >
