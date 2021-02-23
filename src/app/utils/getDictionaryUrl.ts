@@ -1,3 +1,9 @@
 export default (
   url: string, phrase: string,
-): string => url.replace('{{phrase}}', phrase);
+): string => {
+  if (phrase && typeof phrase === 'string' && phrase !== '') {
+    return url.replace('{{phrase}}', phrase);
+  }
+
+  return (new URL(url)).origin;
+};
