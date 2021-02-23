@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Typography from '../base/Typography';
@@ -26,7 +26,9 @@ type SortableListPropsType = {
   onChange: (e: EventCommonSetting) => void,
 };
 
-const SortableList = ({ list, config, onChange }: SortableListPropsType) => {
+const SortableList: FunctionComponent<SortableListPropsType> = (
+  { list, config, onChange }: SortableListPropsType,
+) => {
   const [currentList, updateList] = useState<{ id: string, name: string, off: boolean }[]>(
     config.map(({ id, off }) => {
       const { name } = list.find(({ id: itemId }) => id === itemId);
@@ -34,6 +36,9 @@ const SortableList = ({ list, config, onChange }: SortableListPropsType) => {
     }),
   );
 
+  const onChangeList = (newConfig: DictionaryConfig[]) => {
+    onChange({ name: 'dictionariesConfig', value: newConfig });
+  };
 
   const reorder = (souce: number, dist: number) => {
     const result = Array.from(currentList);
@@ -41,15 +46,19 @@ const SortableList = ({ list, config, onChange }: SortableListPropsType) => {
     result.splice(dist, 0, removed);
 
     const newConfig = result.map(({ id, off }) => ({ id, off }));
-    onChange({ name: 'dictionariesConfig', value: newConfig });
+
+    onChangeList(newConfig);
 
     updateList(result);
   };
 
   const toggleEnabled = (index: number) => {
-    currentList[index].off = !currentList[index].off;
+    const newList = [...currentList];
+    newList[index].off = !newList[index].off;
 
-    updateList([...currentList]);
+    onChangeList(newList);
+
+    updateList(newList);
   };
 
   const onDragEnd = React.useCallback(

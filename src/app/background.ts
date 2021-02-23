@@ -38,7 +38,7 @@ settingsStorage.fetch().then(() => {
   const settingsManager = new SettingsManager({ dictionaryStorage: dictStore, settingsStorage });
 
 
-  const getTabSettings = ({ tabId, sendResponse }: ContextType<any, ContentInitialDataType>) => {
+  const getTabSettings = ({ tabId, sendResponse }: ContextType<null, ContentInitialDataType>) => {
     if (!tabId) return;
 
     const savedSettings = MimicTab.getTabSettings(tabId) || {};
@@ -57,7 +57,7 @@ settingsStorage.fetch().then(() => {
   };
 
   const getCommonSettings = (
-    ctx: ContextType<any, StorageSettingsType>,
+    ctx: ContextType<null, StorageSettingsType>,
   ) => {
     ctx.sendResponse(settingsManager.getFullSettings());
   };
