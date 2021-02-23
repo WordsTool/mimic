@@ -32,7 +32,7 @@
   {
     "id": "MK88n2",
     "name": "Oxford",
-    "url": "https://www.oxfordlearnersdictionaries.com/spellcheck/english/?q={{phrase}}"
+    "url": "https://www.oxfordlearnersdictionaries.com/definition/english/{{phrase}}"
   },
   {
     "id": "xiQog2",
@@ -43,5 +43,40 @@
     "id": "kE10DV",
     "name": "The free dictionary",
     "url": "https://www.thefreedictionary.com/{{phrase}}"
+  },
+  {
+    "id": "oT77E5",
+    "name": "Ozdic",
+    "url": "http://www.ozdic.com/collocation-dictionary/{{phrase}}"
+  },
+  {
+    "id": "sXB11w",
+    "name": "YouGlish",
+    "url": "https://youglish.com/pronounce/{{phrase}}/english"
+  },
+  {
+    "id": "3yR60l",
+    "name": "Urban",
+    "url": "https://www.urbandictionary.com/define.php?term={{phrase}}"
+  },
+  {
+    "id": "QG0kO0",
+    "name": "FrazeIt",
+    "url": "https://fraze.it/n_search.jsp?q={{phrase}}"
+  },
+  {
+    "id": "S06Tib",
+    "name": "WordHippo",
+    "url": "https://www.wordhippo.com/what-is/the-meaning-of-the-word/{{phrase}}.html"
+  },
+  {
+    "id": "82LPbu",
+    "name": "Just The Word",
+    "url": "http://www.just-the-word.com/main.pl?word={{phrase}}"
+  },
+  {
+    "id": "OQ91Xr",
+    "name": "WordReference",
+    "url": "https://www.wordreference.com/definition/{{phrase}}"
   }
 ]
