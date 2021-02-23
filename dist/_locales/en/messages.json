@@ -3,7 +3,7 @@
     "message": "Mimic dictionary"
   },
   "popup_settings_tab_title": {
-    "message": "settings"
+    "message": "Settings"
   },
   "popup_settings_show_label": {
     "message": "Show panel and tail"
@@ -20,12 +20,80 @@
   "popup_dictionaries_tab_title": {
     "message": "Dictionaries"
   },
+
+
   "popup_help_tab_title": {
     "message": "Help"
   },
-  "popup_help_get_started_title": {
+  "get_started_title": {
     "message": "Get started"
   },
+  "get_started_begin": {
+    "message": "To get started, enter a word into the search box and click on any dictionary icon on the panel."
+  },
+  "get_started_select": {
+    "message": "You can also look up words you select on web pages. To look up the selected word:"
+  },
+  "get_started_select_step1": {
+    "message": "open the menu by right-clicking on it and find the Mimic dictionary"
+  },
+  "get_started_select_step2": {
+    "message": "either choose the dictionary from the list or click on “the add word” option to be taken to the panel"
+  },
+
+  "faq_title": {
+    "message": "FAQ"
+  },
+  "faq_show_panel_question": {
+    "message": "How to show the panel?"
+  },
+  "faq_show_panel_answer": {
+    "message": "To unfold the panel, click on the tail with an arrow on the right or the left of the screen."
+  },
+  "faq_unpin_panel_question": {
+    "message": "How to disable the panel for other web pages?"
+  },
+  "faq_unpin_panel_answer": {
+    "message": "To hide the panel on other web pages, set the unpin position at the bottom of the panel."
+  },
+
+  "faq_keep_open_question": {
+    "message": "How to keep the panel open?"
+  },
+  "faq_keep_open_answer": {
+    "message": "To keep the panel open on any web page, pin it by clicking the pin icon at the bottom of the panel."
+  },
+  "faq_open_new_tab_question": {
+    "message": "How to open a dictionary site in a new tab?"
+  },
+  "faq_open_new_tab_answer": {
+    "message": "To do this, click on the icon next to the dictionary button."
+  },
+  "faq_change_position_question": {
+    "message": "How to change the position of the panel on the screen?"
+  },
+  "faq_change_position_answer": {
+    "message": "To choose the position of the search panel and of the tail, click on the position preferred in the layout in the Settings."
+  },
+  "faq_change_theme_question": {
+    "message": "How do I switch the theme from light to dark?"
+  },
+  "faq_change_theme_answer": {
+    "message": "To switch the dark theme on, move the slider forward in the Settings."
+  },
+  "faq_reorder_question": {
+    "message": "How do I reorder the dictionaries on the panel?"
+  },
+  "faq_reorder_answer": {
+    "message": "To change the order of the dictionaries on the panel, go to the Dictionaries tab, click on the dictionary you’d like to replace and drag it where needed."
+  },
+  "faq_disable_question": {
+    "message": "How to disable the search panel?\n"
+  },
+  "faq_disable_answer": {
+    "message": "To disable the search panel, move the slider back in the Settings."
+  },
+
   "content_panel_main_input_placeholder": {
     "message": "Enter phrase"
   },
@@ -43,5 +111,21 @@
   },
   "context_menu_add_phrase": {
     "message": "Add phrase"
+  },
+
+  "popup_contact_tab_title": {
+    "message": "Contacts"
+  },
+  "contact_glad": {
+    "message": "We glad if Mimic help you!"
+  },
+  "contact_has_question": {
+    "message": "Has question or improvement:"
+  },
+  "contact_write": {
+    "message": "Write to us:"
+  },
+  "contact_follow": {
+    "message": "Follow as:"
   }
 }

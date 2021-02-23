@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 type Variant = 'headline1'
@@ -50,6 +49,7 @@ export const getStyle = (variant: Variant): string => {
 };
 
 const Typography = styled.div<TypographyPropsType>`
+  line-height: 160%;
   font-family: ${({ variant }) => fonts[variant][0]};
   font-weight: ${({ variant }) => fonts[variant][1]};
   font-size: ${({ variant }) => `${fonts[variant][2]}px`};

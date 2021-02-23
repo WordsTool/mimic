@@ -17,3 +17,11 @@ export const defaultTabConfig: ContentTabSettingsType = {
   pinned: false,
   phrase: '',
 };
+
+export const contacts: { email: string, patreon: { url: string, text: string } } = {
+  email: 'mimic.dictionary@gmail.com',
+  patreon: {
+    url: 'https://www.patreon.com/mimicdictionary',
+    text: 'patreon.com/mimicdictionary',
+  },
+};

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Typography from '../base/Typography';
+import Faq from './help/faq/Faq';
+import GetStarted from './help/getStarted/GetStarted';
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding: 0 20px;
+`;
 
-const Help = () => (
+const Help: FunctionComponent = () => (
   <Container>
-    <Typography>
-      {chrome.i18n.getMessage('popup_help_get_started_title')}
-    </Typography>
+    <GetStarted />
+    <Faq />
   </Container>
 );
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Tabs, { TabPane } from 'rc-tabs';
 import { getStyle } from '../base/Typography';
@@ -9,6 +9,7 @@ type PopupLayoutPropsType = {
   settings: React.ReactNode,
   dictionaries: React.ReactNode,
   help: React.ReactNode,
+  contact: React.ReactNode,
 };
 
 const Container = styled.div`
@@ -39,7 +40,7 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.palette.primary.main};
   }
   .rc-tabs-tab-btn{
-    ${getStyle('button')}
+    ${getStyle('body1')}
     color: ${({ theme }) => theme.palette.text.main};
     line-height: 52px;
     text-align: center;
@@ -62,8 +63,13 @@ const SupportImg = styled.img`
   width: 144px;
 `;
 
-const PopupLayout = (props: PopupLayoutPropsType) => {
-  const { settings, dictionaries, help } = props;
+const PopupLayout: FunctionComponent<PopupLayoutPropsType> = (props: PopupLayoutPropsType) => {
+  const {
+    settings,
+    dictionaries,
+    help,
+    contact,
+  } = props;
 
   return (
     <Container>
@@ -76,6 +82,9 @@ const PopupLayout = (props: PopupLayoutPropsType) => {
         </TabPane>
         <TabPane tab={i18n('popup_help_tab_title')} key="3">
           {help}
+        </TabPane>
+        <TabPane tab={i18n('popup_contact_tab_title')} key="4">
+          {contact}
         </TabPane>
       </Tabs>
       <Footer>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Typography from '../base/Typography';
 import Switch from '../base/Switch';
@@ -9,7 +9,7 @@ import EventCommonSetting = mimic.popup.EventCommonSetting;
 import UIType = mimic.UIType;
 
 const Form = styled.div`
-  padding: 12px 20px;
+  padding: 8px 20px 0 20px;
 `;
 
 const FormItem = styled.div`
@@ -30,7 +30,9 @@ type SettingsPropsType = {
   onChange: (e: EventCommonSetting) => void
 };
 
-const Settings = ({ data: { disabled, ui }, onChange }: SettingsPropsType) => (
+const Settings: FunctionComponent<SettingsPropsType> = ({
+  data: { disabled, ui }, onChange,
+}: SettingsPropsType) => (
   <Form>
     <FormItem>
       <FormItemDescription>
