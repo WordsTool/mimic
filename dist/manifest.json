@@ -1,8 +1,8 @@
 {
   "name": "__MSG_app_name__",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
-  "description": "Open online dictionaries",
+  "description": "Look up words in several online-dictionaries at a time",
   "homepage_url": "https://www.patreon.com/mimicdictionary",
   "icons": {
     "16": "icons/icon16.png",
