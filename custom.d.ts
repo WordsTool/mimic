@@ -12,6 +12,7 @@ declare namespace mimic {
     id: string,
     url: string,
     name: string,
+    space?: string,
   }
 
   export type UIVerticalType = 'top' | 'center' | 'bottom';

@@ -6,12 +6,14 @@ const List = styled.div`
 `;
 
 export const ListItemContent = styled.div`
+  text-align: left;
   flex: 1;
 `;
 
 export const ListItem = styled.div<{ active?: boolean, onClick?: () => void }>`
   min-height: 48px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 0 12px;
   margin: 0 4px;

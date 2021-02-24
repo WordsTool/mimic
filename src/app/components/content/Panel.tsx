@@ -9,12 +9,12 @@ import CloseIcon from '../../icons/CloseIcon';
 import PoweredBy from '../common/PoweredBy';
 import IconButton from '../base/IconButton';
 import i18n from '../../utils/i18n';
+import Dictionary = mimic.Dictionary;
 
 type PositionType = 'right' | 'left';
 type DictionaryItem = {
-  name: string,
+  dictionary: Dictionary,
   active: boolean,
-  url: string,
 };
 
 export interface PanelPropsType {
@@ -25,8 +25,8 @@ export interface PanelPropsType {
   togglePinned: () => void,
   dictionaries: DictionaryItem[],
   mainInput: React.ReactNode,
-  onPressItem: (url: string) => void,
-  onPressItemNew: (url: string) => void,
+  onPressItem: (dictionary: Dictionary) => void,
+  onPressItemNew: (dictionary: Dictionary) => void,
 }
 
 const PANEL_WIDTH = 240;
@@ -158,15 +158,15 @@ const Panel: FunctionComponent<PanelPropsType> = (props: PanelPropsType) => {
             {mainInput}
           </Form>
           <DictList>
-            {dictionaries.map(({ name, active, url }) => (
+            {dictionaries.map(({ active, dictionary, dictionary: { id, name } }) => (
               <DictionaryListItem
                 title={i18n('content_panel_this_tab_title')}
-                key={name}
+                key={id}
                 ref={(ref) => {
                   if (active && ref) ref.scrollIntoView();
                 }}
                 active={active}
-                onClick={() => onPressItem(url)}
+                onClick={() => onPressItem(dictionary)}
               >
                 <ListItemContent>
                   <Typography variant="subtitle1">
@@ -176,7 +176,7 @@ const Panel: FunctionComponent<PanelPropsType> = (props: PanelPropsType) => {
                 <NewTabActionButton
                   title={i18n('content_panel_new_tab_title')}
                   onClick={(e: MouseEvent) => {
-                    onPressItemNew(url);
+                    onPressItemNew(dictionary);
                     e.preventDefault();
                     e.stopPropagation();
                   }}

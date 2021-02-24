@@ -99,7 +99,7 @@ settingsStorage.fetch().then(() => {
   const onMenuPressDictionary = (info: OnClickData, tab: Tab, dictionary: Dictionary) => {
     const savedSettings = MimicTab.getTabSettings(tab.id) || defaultTabConfig;
     const phrase = info.selectionText;
-    const url = getDictionaryUrl(dictionary.url, phrase);
+    const url = getDictionaryUrl(dictionary, phrase);
 
     MimicTab.createNextTab(url, { ...savedSettings, phrase }, tab);
   };

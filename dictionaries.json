@@ -2,12 +2,14 @@
   {
     "id": "qPWzha",
     "name": "Cambridge",
-    "url": "https://dictionary.cambridge.org/dictionary/english/{{phrase}}"
+    "url": "https://dictionary.cambridge.org/dictionary/english/{{phrase}}",
+    "space": "-"
   },
   {
     "id": "lJrlAs",
     "name": "Collins",
-    "url": "https://www.collinsdictionary.com/dictionary/english/{{phrase}}"
+    "url": "https://www.collinsdictionary.com/dictionary/english/{{phrase}}",
+    "space": "-"
   },
   {
     "id": "XhVTIJ",
@@ -17,7 +19,8 @@
   {
     "id": "eNeNVw",
     "name": "MacMillan",
-    "url": "https://www.macmillandictionary.com/dictionary/british/{{phrase}}"
+    "url": "https://www.macmillandictionary.com/dictionary/british/{{phrase}}",
+    "space": "-"
   },
   {
     "id": "7grJ1s",
@@ -27,22 +30,26 @@
   {
     "id": "KiugJU",
     "name": "Longman",
-    "url": "https://www.ldoceonline.com/dictionary/{{phrase}}"
+    "url": "https://www.ldoceonline.com/dictionary/{{phrase}}",
+    "space": "-"
   },
   {
     "id": "MK88n2",
     "name": "Oxford",
-    "url": "https://www.oxfordlearnersdictionaries.com/definition/english/{{phrase}}"
+    "url": "https://www.oxfordlearnersdictionaries.com/definition/english/{{phrase}}",
+    "space": "-"
   },
   {
     "id": "xiQog2",
     "name": "Dictionary",
-    "url": "https://www.dictionary.com/browse/{{phrase}}"
+    "url": "https://www.dictionary.com/browse/{{phrase}}",
+    "space": "-"
   },
   {
     "id": "kE10DV",
     "name": "The free dictionary",
-    "url": "https://www.thefreedictionary.com/{{phrase}}"
+    "url": "https://www.thefreedictionary.com/{{phrase}}",
+    "space": "+"
   },
   {
     "id": "oT77E5",
@@ -62,17 +69,20 @@
   {
     "id": "QG0kO0",
     "name": "FrazeIt",
-    "url": "https://fraze.it/n_search.jsp?q={{phrase}}"
+    "url": "https://fraze.it/n_search.jsp?q={{phrase}}",
+    "space": "+"
   },
   {
     "id": "S06Tib",
     "name": "WordHippo",
-    "url": "https://www.wordhippo.com/what-is/the-meaning-of-the-word/{{phrase}}.html"
+    "url": "https://www.wordhippo.com/what-is/the-meaning-of-the-word/{{phrase}}.html",
+    "space": "_"
   },
   {
     "id": "82LPbu",
     "name": "Just The Word",
-    "url": "http://www.just-the-word.com/main.pl?word={{phrase}}"
+    "url": "http://www.just-the-word.com/main.pl?word={{phrase}}",
+    "space": "+"
   },
   {
     "id": "OQ91Xr",

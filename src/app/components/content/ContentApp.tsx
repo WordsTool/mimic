@@ -9,6 +9,7 @@ import MainInput from './MainInput';
 import Tail from '../Tail';
 import ContentInitialDataType = mimic.ContentInitialDataType;
 import ContentTabSettingsType = mimic.ContentTabSettingsType;
+import Dictionary = mimic.Dictionary;
 
 type ContentAppPropsType = ContentInitialDataType & {
   syncTabData: (syncData: ContentTabSettingsType) => void,
@@ -53,21 +54,20 @@ const ContentApp = (props: ContentAppPropsType) => {
     [phrase, pinned],
   );
 
-  const panelDictionaries = React.useMemo(() => dictionaries.map(({ name, url }) => ({
-    name,
-    url,
-    active: active && active.name === name,
+  const panelDictionaries = React.useMemo(() => dictionaries.map((dictionary) => ({
+    dictionary,
+    active: active && active.name === dictionary.name,
   })), [dictionaries, location]);
 
   const onPressItem = React.useCallback(
-    (url: string) => {
-      window.location.href = getDictionaryUrl(url, phrase);
+    (dictionary: Dictionary) => {
+      window.location.href = getDictionaryUrl(dictionary, phrase);
     },
     [phrase],
   );
   const onPressItemNew = React.useCallback(
-    (url: string) => {
-      openInNew(getDictionaryUrl(url, phrase));
+    (dictionary: Dictionary) => {
+      openInNew(getDictionaryUrl(dictionary, phrase));
     },
     [phrase],
   );
