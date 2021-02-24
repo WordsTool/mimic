@@ -12,11 +12,15 @@ const messenger = new Messenger({
 const Root = () => {
   const [commonSettings, setCommonSettings] = useState<null | CommonSettingsWithConfig>(null);
 
+  const requestSettings = () => {
+    messenger.request<CommonSettingsWithConfig>('get_common_settings', {}, (response) => {
+      setCommonSettings(response);
+    });
+  };
+
   useEffect(
     () => {
-      messenger.request<CommonSettingsWithConfig>('get_common_settings', {}, (response) => {
-        setCommonSettings(response);
-      });
+      requestSettings();
     },
     [],
   );
@@ -26,12 +30,19 @@ const Root = () => {
     messenger.request<any, UpdateCommonSettings>('update_common_settings', { [name]: value });
   };
 
+  const resetDefault = () => {
+    messenger.request<CommonSettingsWithConfig>('reset_common_settings', {}, () => {
+      requestSettings();
+    });
+  };
+
   if (!commonSettings) return null;
 
   return (
     <PopupApp
       {...commonSettings}
       onChangeSettings={onChangeSettings}
+      onReset={resetDefault}
     />
   );
 };

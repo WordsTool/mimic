@@ -31,6 +31,15 @@ export default class SettingsManager {
     });
   }
 
+  reset(): Promise<StorageSettingsType> {
+    return new Promise((resolve) => {
+      this.settingsStorage.reset().then((settings) => {
+        this.dictionaryStorage.updateConfig(settings.dictionariesConfig);
+        resolve(settings);
+      });
+    });
+  }
+
   getContentSettings(): CommonSettingsType {
     const settings = {
       ...this.settingsStorage.get(),

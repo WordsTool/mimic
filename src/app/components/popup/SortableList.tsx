@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Typography from '../base/Typography';
@@ -7,6 +7,7 @@ import DragIcon from '../../icons/DragIcon';
 import List, {
   ListItem, ListItemAction, ListItemContent, ListItemIcon,
 } from '../base/List';
+import useIsMounted from '../common/useIsMounted';
 import Dictionary = mimic.Dictionary;
 import DictionaryConfig = mimic.DictionaryConfig;
 import EventCommonSetting = mimic.popup.EventCommonSetting;
@@ -26,14 +27,33 @@ type SortableListPropsType = {
   onChange: (e: EventCommonSetting) => void,
 };
 
+type ListType = { id: string, name: string, off: boolean }[];
+
+const initList = (
+  list: Dictionary[],
+  config: DictionaryConfig[],
+): ListType => config.map(({ id, off }) => {
+  const { name } = list.find(({ id: itemId }) => id === itemId);
+  return { id, name, off };
+});
+
+
 const SortableList: FunctionComponent<SortableListPropsType> = (
   { list, config, onChange }: SortableListPropsType,
 ) => {
-  const [currentList, updateList] = useState<{ id: string, name: string, off: boolean }[]>(
-    config.map(({ id, off }) => {
-      const { name } = list.find(({ id: itemId }) => id === itemId);
-      return { id, name, off };
-    }),
+  const [currentList, updateList] = useState<ListType>(
+    initList(list, config),
+  );
+
+  const isMounted = useIsMounted();
+
+  useEffect(
+    () => {
+      if (isMounted) {
+        updateList(initList(list, config));
+      }
+    },
+    [list],
   );
 
   const onChangeList = (newConfig: DictionaryConfig[]) => {

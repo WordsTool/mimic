@@ -75,6 +75,20 @@ settingsStorage.fetch().then(() => {
     });
   };
 
+  const resetCommonSettings = ({ sendResponse }: ContextType) => {
+    settingsManager.reset().then(() => {
+      const newActiveDictionaries = dictStore.getActiveList();
+      sendResponse({ ok: true });
+      mimicMenu.update({ dictionaries: newActiveDictionaries });
+
+      messenger.sentToTabs({
+        type: 'sync_tab_common_settings',
+        data: settingsManager.getContentSettings(),
+      });
+    });
+    sendResponse();
+  };
+
   const openInNewTab = async ({ tabId, data, sender }: ContextType<{ url: string }>) => {
     const currentSettings = MimicTab.getTabSettings(tabId) || defaultTabConfig;
     const { url } = data;
@@ -101,6 +115,7 @@ settingsStorage.fetch().then(() => {
     { type: 'get_tab_settings', controller: getTabSettings },
     { type: 'update_tab_settings', controller: updateTabSettings },
     { type: 'update_common_settings', controller: updateCommonSettings },
+    { type: 'reset_common_settings', controller: resetCommonSettings },
     { type: 'get_common_settings', controller: getCommonSettings },
     { type: 'open_in_new_tab', controller: openInNewTab },
   ]);

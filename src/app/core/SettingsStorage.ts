@@ -73,4 +73,13 @@ export default class SettingsStorage {
       });
     });
   }
+
+  public async reset(): Promise<StorageSettingsType> {
+    return new Promise((resolve) => {
+      chrome.storage.sync.remove(STORAGE_NAME, () => {
+        this.current = this.initial;
+        resolve(this.current);
+      });
+    });
+  }
 }

@@ -3,7 +3,7 @@ import MessageSender = chrome.runtime.MessageSender;
 export interface ContextType<A=any, B=any> {
   tabId: number,
   data: A,
-  sendResponse: (response: B) => void,
+  sendResponse: (response?: B) => void,
   sender: MessageSender,
 }
 

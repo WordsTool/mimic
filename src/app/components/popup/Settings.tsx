@@ -28,10 +28,13 @@ const FormItemControl = styled.div``;
 type SettingsPropsType = {
   data: { disabled: boolean, ui: UIType },
   onChange: (e: EventCommonSetting) => void
+  onReset: () => void
 };
 
 const Settings: FunctionComponent<SettingsPropsType> = ({
-  data: { disabled, ui }, onChange,
+  data: { disabled, ui },
+  onChange,
+  onReset,
 }: SettingsPropsType) => (
   <Form>
     <FormItem>
@@ -89,6 +92,13 @@ const Settings: FunctionComponent<SettingsPropsType> = ({
           }}
         />
       </FormItemControl>
+    </FormItem>
+    <FormItem style={{ display: 'none' }}>
+      <FormItemDescription>
+        <Typography onClick={onReset} style={{ cursor: 'pointer' }}>
+          Reset default
+        </Typography>
+      </FormItemDescription>
     </FormItem>
   </Form>
 );

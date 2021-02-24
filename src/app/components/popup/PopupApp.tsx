@@ -11,10 +11,11 @@ import CommonSettingsWithConfig = mimic.CommonSettingsWithConfig;
 
 type PopupAppPropsType = CommonSettingsWithConfig & {
   onChangeSettings: (e: { name: 'disabled', value: boolean }) => void
+  onReset: () => void,
 };
 
 const PopupApp: FunctionComponent<PopupAppPropsType> = ({
-  ui, disabled, onChangeSettings, dictionariesConfig, dictionaries,
+  ui, disabled, onChangeSettings, dictionariesConfig, dictionaries, onReset,
 }: PopupAppPropsType) => (
   <Theme theme={ui.theme}>
     <FontStyle />
@@ -22,6 +23,7 @@ const PopupApp: FunctionComponent<PopupAppPropsType> = ({
       settings={(
         <Settings
           onChange={onChangeSettings}
+          onReset={onReset}
           data={{ disabled, ui }}
         />
       )}
