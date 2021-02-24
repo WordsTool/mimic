@@ -6,16 +6,16 @@
     "message": "Settings"
   },
   "popup_settings_show_label": {
-    "message": "Show panel and tail"
+    "message": "Show toggle and sidebar"
   },
   "popup_settings_position_label": {
-    "message": "Position for tail and panel"
+    "message": "Replace toggle and sidebar"
   },
   "popup_settings_position_caption": {
-    "message": "Select position of panel by horizontal and select position of tail by horizontal and vertical"
+    "message": "Place the sidebar and the toggle either on the right or the left by clicking on their position in the layout."
   },
   "popup_settings_theme_label": {
-    "message": "Dark theme"
+    "message": "Change theme"
   },
   "popup_dictionaries_tab_title": {
     "message": "Dictionaries"
@@ -29,7 +29,7 @@
     "message": "Get started"
   },
   "get_started_begin": {
-    "message": "To get started, enter a word into the search box and click on any dictionary icon on the panel."
+    "message": "To get started, enter a word into the search box and click on any dictionary icon on the sidebar."
   },
   "get_started_select": {
     "message": "You can also look up words you select on web pages. To look up the selected word:"
@@ -38,64 +38,64 @@
     "message": "open the menu by right-clicking on it and find the Mimic dictionary"
   },
   "get_started_select_step2": {
-    "message": "either choose the dictionary from the list or click on “the add word” option to be taken to the panel"
+    "message": "either choose a dictionary from the list or click on the “Add word or phrase” option to be taken to the sidebar"
   },
 
   "faq_title": {
-    "message": "FAQ"
+    "message": "HOW TO"
   },
   "faq_show_panel_question": {
-    "message": "How to show the panel?"
+    "message": "- show the sidebar"
   },
   "faq_show_panel_answer": {
-    "message": "To unfold the panel, click on the tail with an arrow on the right or the left of the screen."
+    "message": "To open the sidebar, click on the toggle with an arrow on the right or the left of the screen."
   },
   "faq_unpin_panel_question": {
-    "message": "How to disable the panel for other web pages?"
+    "message": "- disable the sidebar for other web pages"
   },
   "faq_unpin_panel_answer": {
-    "message": "To hide the panel on other web pages, set the unpin position at the bottom of the panel."
+    "message": "To hide the sidebar on other web pages, set the unpin position at the bottom of the sidebar."
   },
 
   "faq_keep_open_question": {
-    "message": "How to keep the panel open?"
+    "message": "- keep the sidebar open"
   },
   "faq_keep_open_answer": {
-    "message": "To keep the panel open on any web page, pin it by clicking the pin icon at the bottom of the panel."
+    "message": "To keep the sidebar open on any web page, pin it by clicking the pin icon at the bottom of the sidebar."
   },
   "faq_open_new_tab_question": {
-    "message": "How to open a dictionary site in a new tab?"
+    "message": "- open a dictionary site in a new tab"
   },
   "faq_open_new_tab_answer": {
-    "message": "To do this, click on the icon next to the dictionary button."
+    "message": "To open a dictionary site in a new window, click on the external link icon next to the dictionary button."
   },
   "faq_change_position_question": {
-    "message": "How to change the position of the panel on the screen?"
+    "message": "- change the position of the sidebar on the screen"
   },
   "faq_change_position_answer": {
-    "message": "To choose the position of the search panel and of the tail, click on the position preferred in the layout in the Settings."
+    "message": "To choose the position of both the sidebar and the toggle, click on the position preferred in the layout in the Settings."
   },
   "faq_change_theme_question": {
-    "message": "How do I switch the theme from light to dark?"
+    "message": "- switch the theme from light to dark"
   },
   "faq_change_theme_answer": {
     "message": "To switch the dark theme on, move the slider forward in the Settings."
   },
   "faq_reorder_question": {
-    "message": "How do I reorder the dictionaries on the panel?"
+    "message": "- reorder the dictionaries on the sidebar"
   },
   "faq_reorder_answer": {
-    "message": "To change the order of the dictionaries on the panel, go to the Dictionaries tab, click on the dictionary you’d like to replace and drag it where needed."
+    "message": "To change the order of the dictionaries, open the Dictionaries tab, click on the dictionary you’d like to replace and drag it where needed."
   },
   "faq_disable_question": {
-    "message": "How to disable the search panel?\n"
+    "message": "- disable the sidebar\n"
   },
   "faq_disable_answer": {
-    "message": "To disable the search panel, move the slider back in the Settings."
+    "message": "To disable the sidebar, move the slider back in the Settings."
   },
 
   "content_panel_main_input_placeholder": {
-    "message": "Enter phrase"
+    "message": "Enter word or phrase"
   },
   "content_panel_this_tab_title": {
     "message": "Open dictionary in this tab"
@@ -104,28 +104,31 @@
     "message": "Open dictionary in new tab"
   },
   "content_panel_pin_button_title": {
-    "message": "Pin panel"
+    "message": "Pin sidebar"
   },
   "content_panel_unpin_button_title": {
-    "message": "Unpin panel"
+    "message": "Unpin sidebar"
   },
   "context_menu_add_phrase": {
-    "message": "Add phrase"
+    "message": "Add word or phrase"
   },
 
   "popup_contact_tab_title": {
     "message": "Contacts"
   },
   "contact_glad": {
-    "message": "We glad if Mimic help you!"
+    "message": "Is there anything we could add to make it helpful for you?"
   },
   "contact_has_question": {
-    "message": "Has question or improvement:"
+    "message": "Questions and suggestions are always welcome!"
   },
   "contact_write": {
-    "message": "Write to us:"
+    "message": "Contact us:"
   },
   "contact_follow": {
-    "message": "Follow as:"
+    "message": "Follow us:"
+  },
+  "contact_support": {
+    "message": "Do you like this extension?<br/>You can support us here"
   }
 }

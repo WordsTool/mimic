@@ -26,6 +26,7 @@ const Container = styled.div`
   }
   .rc-tabs-tabpane{
     outline: none;
+    position: relative;
   }
   .rc-tabs-content-holder {
     display: flex;
