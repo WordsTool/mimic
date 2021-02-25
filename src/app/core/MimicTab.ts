@@ -2,6 +2,7 @@ import ContentTabSettingsType = mimic.ContentTabSettingsType;
 import Tab = chrome.tabs.Tab;
 
 const tabsStorage: { [key: number]: ContentTabSettingsType } = {};
+const injectedList: { [key: number]: boolean } = {};
 
 export default class MimicTab {
   static getCurrentTab(): Promise<Tab | undefined> {
@@ -20,10 +21,37 @@ export default class MimicTab {
     return undefined;
   }
 
+  static injectContent(): void {
+    chrome.tabs.executeScript({
+      file: 'js/content.js',
+    });
+  }
+
+  static isInjected(id: number): boolean {
+    return !!injectedList[id];
+  }
+
+  static addInjected(id: number): void {
+    injectedList[id] = true;
+  }
+
+  static removeInjected(id: number): void {
+    delete injectedList[id];
+  }
+
+  static injectPopup = (id: number): void => {
+    chrome.browserAction.setPopup({
+      tabId: id,
+      popup: 'popup.html',
+    });
+  };
+
   static createNextTab(url: string, tabSettings: ContentTabSettingsType, tab: Tab) {
     MimicTab.getNextTabIndex(tab).then((index) => {
       chrome.tabs.create({ active: true, url, index }, (createdTab: Tab) => {
         MimicTab.updateTabSetting(createdTab.id, tabSettings);
+        MimicTab.injectPopup(createdTab.id);
+        MimicTab.addInjected(createdTab.id);
       });
     });
   }
@@ -40,5 +68,9 @@ export default class MimicTab {
     tabsStorage[tabId] = updatedSettings;
 
     return updatedSettings;
+  }
+
+  static removeTabSettings(tabId: number) {
+    delete tabsStorage[tabId];
   }
 }

@@ -44,4 +44,6 @@ const Root = () => {
   return (<ContentApp {...data} syncTabData={syncTabData} openInNew={openInNew} />);
 };
 
-render((<Root />), addDom('mimic_dictionary'));
+if (!document.getElementById('mimic_dictionary')) {
+  render((<Root />), addDom('mimic_dictionary'));
+}

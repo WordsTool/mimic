@@ -14,7 +14,7 @@ export const commonSettings: BaseSettings = {
 };
 
 export const defaultTabConfig: ContentTabSettingsType = {
-  pinned: false,
+  pinned: true,
   phrase: '',
 };
 

@@ -37,6 +37,36 @@ settingsStorage.fetch().then(() => {
   const mimicMenu = new MimicMenu();
   const settingsManager = new SettingsManager({ dictionaryStorage: dictStore, settingsStorage });
 
+  const inject = (id: number) => {
+    MimicTab.injectContent();
+    MimicTab.injectPopup(id);
+    MimicTab.addInjected(id);
+  };
+
+  chrome.browserAction.onClicked.addListener((tab) => {
+    const { id } = tab;
+    if (id && !MimicTab.isInjected(id)) {
+      inject(id);
+    }
+  });
+
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (MimicTab.isInjected(tabId) && tab.active && changeInfo.status === 'loading') {
+      inject(tabId);
+    }
+    if (/^https?:/.test(String(tab.url))) {
+      chrome.browserAction.enable(tabId);
+    } else {
+      chrome.browserAction.disable(tabId);
+    }
+  });
+
+  chrome.tabs.onRemoved.addListener((tabId) => {
+    if (typeof tabId === 'number') {
+      MimicTab.removeInjected(tabId);
+      MimicTab.removeTabSettings(tabId);
+    }
+  });
 
   const getTabSettings = ({ tabId, sendResponse }: ContextType<null, ContentInitialDataType>) => {
     if (!tabId) return;
@@ -104,11 +134,21 @@ settingsStorage.fetch().then(() => {
     MimicTab.createNextTab(url, { ...savedSettings, phrase }, tab);
   };
 
-  const onMenuPressAdd = (info: OnClickData, { id }: Tab) => {
-    chrome.tabs.sendMessage(id, {
-      type: 'sync_tab_common_settings',
-      data: { phrase: info.selectionText },
-    });
+  const onMenuPressAdd = ({ selectionText: phrase }: OnClickData, { id, active }: Tab) => {
+    let timer = 0;
+    if (!MimicTab.isInjected(id) && active) {
+      inject(id);
+      timer = 500;
+    }
+    setTimeout(
+      () => {
+        chrome.tabs.sendMessage(id, {
+          type: 'sync_tab_common_settings',
+          data: { phrase },
+        });
+      },
+      timer,
+    );
   };
 
   messenger.addListeners([

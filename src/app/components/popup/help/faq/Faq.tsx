@@ -11,7 +11,6 @@ const Container = styled.div`
 const Faq: FunctionComponent = () => {
   const { current: list } = useRef([
     [i18n('faq_show_panel_question'), i18n('faq_show_panel_answer')],
-    [i18n('faq_unpin_panel_question'), i18n('faq_unpin_panel_answer')],
     [i18n('faq_keep_open_question'), i18n('faq_keep_open_answer')],
     [i18n('faq_open_new_tab_question'), i18n('faq_open_new_tab_answer')],
     [i18n('faq_change_position_question'), i18n('faq_change_position_answer')],

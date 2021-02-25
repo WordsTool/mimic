@@ -8,6 +8,7 @@ const InputWrapper = styled.div`
 `;
 
 const InputField = styled.input`
+  color: #000000;
   position: relative;
   width: 100%;
   padding: 0;

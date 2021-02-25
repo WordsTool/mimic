@@ -50,18 +50,12 @@
   "faq_show_panel_answer": {
     "message": "To open the sidebar, click on the toggle with an arrow on the right or the left of the screen."
   },
-  "faq_unpin_panel_question": {
-    "message": "- disable the sidebar for other web pages"
-  },
-  "faq_unpin_panel_answer": {
-    "message": "To hide the sidebar on other web pages, set the unpin position at the bottom of the sidebar."
-  },
 
   "faq_keep_open_question": {
-    "message": "- keep the sidebar open"
+    "message": "- keep the sidebar open while switching between dictionary sites"
   },
   "faq_keep_open_answer": {
-    "message": "To keep the sidebar open on any web page, pin it by clicking the pin icon at the bottom of the sidebar."
+    "message": "To keep the sidebar open, pin it by clicking the pin icon at the bottom of the sidebar."
   },
   "faq_open_new_tab_question": {
     "message": "- open a dictionary site in a new tab"
